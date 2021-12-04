@@ -75,7 +75,7 @@ function Navbar({Close,setClose}) {
         style={{
             paddingLeft: Close ? "1rem" : null,
             width: Close ? "5rem" : null
-        }}
+         }}
       />
       <h2 className="font-body tracking-tighter pl-10 pt-5 text-2xl text-primary font-medium transition-all"
         style={{
