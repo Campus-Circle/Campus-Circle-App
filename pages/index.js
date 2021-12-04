@@ -34,7 +34,7 @@ export default function Home() {
             Welcome to Campus Circle
           </h1>
           <h3 className="text-primary">
-            Jamia Millia Islamia
+            Faculty of Engineering Jamia Millia Islamia
           </h3>
           <p className=" text-lg md:ext-2xl mt-5 text-gray-400 md:leading-10">
             College Circle is a platform where students can stay updated of
@@ -67,6 +67,7 @@ export default function Home() {
           <p className="text-lg md:text-2xl mt-5 text-gray-400 md:leading-10">
             Feel free to contribute by raising an issue or a PR.
           </p> 
+          <Link href="https://github.com/Campus-Circle">
           <button className="flex bg-primary p-3 mt-4 rounded-lg shadow-lg hover:bg-secondary hover:shadow-sm transition-all focus:outline-black">
             <span className="self-center text-xl text-white font-medium">
               Contribute on
@@ -75,6 +76,7 @@ export default function Home() {
               className="ml-3 w-12"
              src="/assets/Socials/GitHubWhite.svg"/>
           </button>
+          </Link>
       </div>
     </div>
   );

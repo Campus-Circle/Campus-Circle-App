@@ -36,14 +36,14 @@ function Navbar({Close,setClose}) {
 
   const Socials = [
     {
+      link:"https://github.com/Campus-Circle",
       src: "/assets/Socials/GitHub.svg",
     },
     {
+      link:"https://www.instagram.com/jmicampuscircle/",
       src: "/assets/Socials/Instagram.svg",
     },
-    {
-      src: "/assets/Socials/Linkedin.svg",
-    },
+
   ];
 
   function ChangeClose() {
@@ -82,7 +82,7 @@ function Navbar({Close,setClose}) {
             display: Close? "none" : null
         }}
       >
-        Jamia Millia Islamia
+        FET Jamia Millia Islamia
       </h2>
 
       <ul className="flex-grow">
@@ -135,11 +135,13 @@ function Navbar({Close,setClose}) {
         >
           {Socials.map((item, index) => {
             return (
+              <Link href={item.link}>
               <li className="transition-all" style={{
                   paddingTop : Close ? "0.5rem" : null
               }}>
                 <img className="w-16 mr-3" src={item.src} />
               </li>
+              </Link>
             );
           })}
         </ul>

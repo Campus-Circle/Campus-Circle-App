@@ -1,19 +1,22 @@
 import React from "react";
 import Script from "next/script";
 
+import Link from "next/link";
+
 function Index() {
 
-    const Socials = [
-        {
-          src: "/assets/Socials/GitHub.svg",
-        },
-        {
-          src: "/assets/Socials/Instagram.svg",
-        },
-        {
-          src: "/assets/Socials/Linkedin.svg",
-        },
-      ];
+  const Socials = [
+    {
+      link:"https://github.com/Campus-Circle",
+      src: "/assets/Socials/GitHub.svg",
+    },
+    {
+      link:"https://www.instagram.com/jmicampuscircle/",
+      src: "/assets/Socials/Instagram.svg",
+    },
+
+  ];
+
 
   return (
     <div className="w-full  font-body">
@@ -36,9 +39,11 @@ function Index() {
             <ul className="flex"   >
           {Socials.map((item, index) => {
             return (
+              <Link href={item.link}>
               <li className="transition-all">
                 <img className="w-16 mr-3" src={item.src} />
               </li>
+              </Link>
             );
           })}
         </ul>
