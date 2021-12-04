@@ -29,7 +29,7 @@ function Course({course,syllabus}) {
 }
 
 export async function getStaticPaths() {
-    const {data} = await axios.get(`${process.env.URL}/course/index.json`)
+    const {data} = await axios.get(`${process.env.URL}/course`)
 
     const paths = data.map((item) => ({ params: { id: item.url } }));
     console.log(paths)
@@ -43,7 +43,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }){
     const id = params.id;
 
-    const {data} = await axios.get(`${process.env.URL}/course/index.json`);
+    const {data} = await axios.get(`${process.env.URL}/course`);
 
     let course = data.filter((item) => item.url == id);
 

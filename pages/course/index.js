@@ -22,9 +22,12 @@ function index({ data }) {
 }
 
 export async function getStaticProps(props) {
-  const { data } = await axios.get(`${process.env.URL}/course/index.json`);
+  
+  console.log(process.env.URL)
+  const { data } = await axios.get(`${process.env.URL}/course`);
 
-  // console.log(data)
+
+  console.log(data)
 
   return {
     props: {

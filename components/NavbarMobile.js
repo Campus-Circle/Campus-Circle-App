@@ -41,7 +41,7 @@ function Navbar({Close,setClose}) {
     ];
 
     return (
-        <div className="flex fixed w-screen bg-primary shadow-lg">
+        <div className="flex md:hidden fixed w-screen bg-primary shadow-lg">
                 {TopNav.map((item,index) => {
                     return (
                       <Link href={item.link}>

@@ -21,7 +21,7 @@ function Index({data}) {
 }
 
 export async function getStaticProps(props) {
-    const { data } = await axios.get(`${process.env.URL}/placements/index.json`);
+    const { data } = await axios.get(`${process.env.URL}/placements`);
 
     return {
       props: {

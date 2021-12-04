@@ -29,7 +29,7 @@ function Placement({id,data}) {
 export default Placement
 
 export async function getStaticPaths() {
-    const {data} = await axios.get(`${process.env.URL}/placements/index.json`)
+    const {data} = await axios.get(`${process.env.URL}/placements`)
 
     const paths = data.map((item) => ({ params: { id: item.name } }));
     console.log(paths)
