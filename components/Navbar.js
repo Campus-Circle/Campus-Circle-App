@@ -77,13 +77,6 @@ function Navbar({Close,setClose}) {
             width: Close ? "5rem" : null
          }}
       />
-      <h2 className="font-body tracking-tighter pl-10 pt-5 text-2xl text-primary font-medium transition-all"
-        style={{
-            display: Close? "none" : null
-        }}
-      >
-        FET Jamia Millia Islamia
-      </h2>
 
       <ul className="flex-grow">
         {TopNav.map((item, index) => {

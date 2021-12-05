@@ -2,7 +2,7 @@ import Head from "next/head";
 
 import Link from "next/link";
 
-export default function Home() {
+export default function Home(props) {
 
   const TopNav = [
     {
@@ -34,7 +34,7 @@ export default function Home() {
             Welcome to Campus Circle
           </h1>
           <h3 className="text-primary">
-            Faculty of Engineering Jamia Millia Islamia
+            {props.college}
           </h3>
           <p className=" text-lg md:ext-2xl mt-5 text-gray-400 md:leading-10">
             College Circle is a platform where students can stay updated of
@@ -80,4 +80,16 @@ export default function Home() {
       </div>
     </div>
   );
+}
+
+export async function getStaticProps(){
+  const college = process.env.COLLEGE;
+
+  console.log(college)
+
+  return{
+    props:{
+      college : college
+    }
+  }
 }
