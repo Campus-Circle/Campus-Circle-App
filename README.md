@@ -13,7 +13,7 @@ Stay Updated to
 
 Fill the form below and we will start a campuscircle in your college as well
 
-[Fill the Form](https://airtable.com/shryyOYCOLpS138Pl){: .btn .btn-blue}
+[Fill the Form](https://airtable.com/shryyOYCOLpS138Pl)
 
 ## Feel Free to Contribute
 
