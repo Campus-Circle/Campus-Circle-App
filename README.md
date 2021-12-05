@@ -13,7 +13,7 @@ Stay Updated to
 
 Fill the form below and we will start a campuscircle in your college as well
 
-<iframe class="airtable-embed" src="https://airtable.com/embed/shryyOYCOLpS138Pl?backgroundColor=orange" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
+[Fill the Form](https://airtable.com/shryyOYCOLpS138Pl){: .btn .btn-blue}
 
 ## Feel Free to Contribute
 
