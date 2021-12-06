@@ -1,7 +1,7 @@
 import React from "react";
 import Script from "next/script";
-
 import Link from "next/link";
+import Head from "next/head";
 
 function Index() {
 
@@ -17,9 +17,13 @@ function Index() {
 
   ];
 
-
   return (
     <div className="w-full  font-body">
+    <Head>
+      <title>{ `Contact Us` }</title>
+      <meta name="og:title" content={ `Contact Us` } />
+      <meta name="twitter:title" content={ `Contact Us` } />
+    </Head>
       <Script src="https://static.airtable.com/js/embed/embed_snippet_v1.js" />
       <div className="flex p-4 flex-col md:flex-row">
         <div className="md:w-1/2 md:pl-28 md:pt-20">
