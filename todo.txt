@@ -1,5 +1,4 @@
-SEO meta improvements
-Events and Notes section 
+SEO meta improvements [DONE]
 environment variables not loading from .env.sample --> change that to .env.local (and not pushed) [ DONE ]
 abrupt animation change on sidebar
 remove some redundant code [ DONE ]

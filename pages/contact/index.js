@@ -33,7 +33,7 @@ function Index() {
             <ul>
                 {['alamsarfraz422@gmail.com','+91-7303435034'].map((item,index) => {
                     return (
-                        <li className="font-medium pl-3 pt-2 text-gray-500">
+                        <li key={item} className="font-medium pl-3 pt-2 text-gray-500">
                             {item}
                         </li>
                     )
@@ -43,7 +43,7 @@ function Index() {
             <ul className="flex"   >
           {Socials.map((item, index) => {
             return (
-              <Link href={item.link}>
+              <Link key={item.link} href={item.link}>
               <li className="transition-all">
                 <img className="w-16 mr-3" src={item.src} />
               </li>
@@ -54,10 +54,9 @@ function Index() {
         </div>
         <div className="md:w-1/2">
           <iframe
-            class="airtable-embed airtable-dynamic-height"
+            className="airtable-embed airtable-dynamic-height"
             src="https://airtable.com/embed/shrxTM9zeV7oAp4Rg?backgroundColor=orange"
-            frameborder="0"
-            onmousewheel=""
+            frameBorder="0"
             width="100%"
             height="756"
           ></iframe>
@@ -68,3 +67,4 @@ function Index() {
 }
 
 export default Index;
+

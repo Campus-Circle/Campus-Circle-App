@@ -42,19 +42,18 @@ function Navbar({Close,setClose}) {
 
     return (
         <div className="flex md:hidden fixed w-screen bg-primary shadow-lg">
-                {TopNav.map((item,index) => {
-                    return (
-                      <Link href={item.link}>
-                        <div className="w-1/5 flex justify-center items-center py-3 transition-all"
-                          style={{
-                            backgroundColor: (router.pathname == item.link) ? "#0077b550" : null
-                          }}
-                        >
-                            <img src={item.src}/>
-                        </div>
-                        </Link>
-                    )
-                })}
+            {TopNav.map((item,index) => {
+                return (
+                    <Link key={item.name} href={item.link}>
+                      <div className="w-1/5 flex justify-center items-center py-3 transition-all"
+                        style={{
+                          backgroundColor: (router.pathname == item.link) ? "#0077b550" : null
+                        }}>
+                          <img src={item.src}/>
+                      </div>
+                    </Link>
+                )
+            })}
 
         </div>
     )

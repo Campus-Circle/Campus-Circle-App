@@ -15,7 +15,7 @@ function index({ data, college }) {
       <ul className="items-center font-body">
         {data.map((item, index) => {
           return (
-            <Link href={`course/${item.url}`}>
+            <Link key={item.name} href={`course/${item.url}`}>
               <li className="tracking-tight p-5 md:p-3 text-xl my-2 hover:bg-primary hover:text-white font-medium cursor-pointer transition-all hover:shadow-lg px-4 rounded-md">
                 {item.name}
               </li>
