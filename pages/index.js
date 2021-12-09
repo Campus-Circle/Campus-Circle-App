@@ -92,6 +92,6 @@ export async function getStaticProps(){
   return{
     props:{
       college : college
-    }
+    }, revalidate: 20, // revalidation of the static data after 20 seconds
   }
 }

@@ -1,4 +1,5 @@
-SEO meta improvements [DONE]
-environment variables not loading from .env.sample --> change that to .env.local (and not pushed) [ DONE ]
+SEO meta improvements [ DONE ]
+environment variables not loading from .env.sample --> change name to .env.local (and not pushed) [ DONE ]
 abrupt animation change on sidebar
+Revalidation of the gotten static data [ DONE ]
 remove some redundant code [ DONE ]

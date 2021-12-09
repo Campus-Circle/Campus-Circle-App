@@ -33,7 +33,7 @@ export async function getStaticProps(props) {
       props: {
         data: data,
         college: college
-      },
+      }, revalidate: 20,
     };
   }
   

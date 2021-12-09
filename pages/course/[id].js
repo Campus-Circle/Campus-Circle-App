@@ -56,7 +56,7 @@ export async function getStaticProps({ params }){
         props:{
             course : course[0],
             syllabus : syllabus.data
-        }
+        }, revalidate: 20,
     }
 }
 
