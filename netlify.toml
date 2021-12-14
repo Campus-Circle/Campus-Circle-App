@@ -1,9 +1,0 @@
-
-[build]
-  base = "/"
-
-
-  publish = "/.next"
-
-  # Default build command.
-  command = "echo 'default context'"
