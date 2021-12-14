@@ -32,6 +32,12 @@ function Navbar({Close,setClose}) {
       src: "/assets/Navbar/Events.svg",
       link: '/events'
     },
+    {
+      id: 5,
+      name: "Notes",
+      src: "/assets/Navbar/Notes.svg",
+      link: '/notes'
+    }
   ];
 
   const Socials = [
@@ -54,13 +60,13 @@ function Navbar({Close,setClose}) {
 
   return (
     <div 
-        className="fixed hidden md:block left-0 top-0 bg-gray-100 w-60 md:w-96 md:h-screen border-r-2 flex flex-col transition-all"
+        className="fixed md:block left-0 top-0 bg-gray-100 w-60 md:w-64 md:h-screen border-r-2 flex flex-col transition-all"
         style={{
             width: Close ? "6rem" : null
         }}
     >
       <button 
-        className="fixed top-24 left-60 md:left-96 -ml-5 transition-all"
+        className="fixed top-24 md:w-8 left-60 md:left-64 -ml-4 transition-all"
         onClick = {() => ChangeClose()}
         style={{
             transform: Close ? "rotate(180deg)" : null,
@@ -70,7 +76,7 @@ function Navbar({Close,setClose}) {
         <img className="w-12" src="/assets/Navbar/Back.svg" />
       </button>
       <img 
-        className="w-28 md:w-44 pl-10 pt-5 transition-all" 
+        className="w-28 md:w-36 pl-10 pt-5 transition-all" 
         src="/assets/CampusCircle.svg" 
         style={{
             paddingLeft: Close ? "1rem" : null,
@@ -83,14 +89,14 @@ function Navbar({Close,setClose}) {
           return (
             <Link href={item.link}>
             <li 
-            className="flex p-3 m-4 my-6 font-body text-primary rounded-md cursor-pointer hover:bg-white hover:bg-opacity-40 border-2 border-transparent transition-all"
+            className="flex p-3 m-4 my-2 font-body text-primary rounded-md cursor-pointer hover:bg-white hover:bg-opacity-40 border-2 border-transparent transition-all"
             style={{
-              backgroundColor: (router.pathname == item.link) ? 'white' : null
+              backgroundColor: (router.pathname == item.link) ? 'white' : null,
             }}
             >
-              <img className="w-7" src={item.src} />
+              <img className="w-5" src={item.src} />
               <div 
-                className="self-center text-2xl font-semibold pl-4 transition-all"
+                className="self-center text-xl font-medium pl-4 transition-all"
                 style={{
                     display: Close ? "none" : null,
                 }}
@@ -110,8 +116,8 @@ function Navbar({Close,setClose}) {
             backgroundColor: (router.pathname == "/contact") ? 'white' : null
           }}
         >
-          <img className="w-7" src="/assets/Navbar/Phone.svg" />
-          <div className="self-center text-2xl font-semibold pl-4"
+          <img className="w-5" src="/assets/Navbar/Phone.svg" />
+          <div className="self-center text-xl font-medium pl-4"
           style={{
               display: Close ? "none" : null
           }}>

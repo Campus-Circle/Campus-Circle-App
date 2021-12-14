@@ -30,24 +30,24 @@ export default function Home(props) {
     <div className="flex flex-col p-4 md:pl-16 md:pt-20 min-h-screen py-2 transition-all font-body">
       <div className="flex" id="welcometocampuscircle">
         <div className="md:w-2/3 flex-grow">
-          <h1 className="text-2xl mt-6 md:text-4xl font-medium tracking-tight">
+          <h1 className="text-2xl mt-6 md:text-3xl font-medium tracking-tight">
             Welcome to Campus Circle
           </h1>
           <h3 className="text-primary">
             {props.college}
           </h3>
-          <p className=" text-lg md:ext-2xl mt-5 text-gray-400 md:leading-10">
+          <p className="text-base md:ext-2xl mt-5 text-gray-400 md:leading-6">
             College Circle is a platform where students can stay updated of
             everything around Campus.
           </p>
-          <p className="text-lg md:text-2xl mt-5 text-gray-400 leading-10">
+          <p className="text-lg md:text-xl mt-5 text-gray-400 leading-10">
             Stay Updated to
           </p>
           <ul className="border-l-2 pl-5 my-4">
             {TopNav.map((item,index) => {
               return(
                 <Link href={item.link}>
-                <li className="text-lg md:text-2xl text-primary font-medium md:my-2 hover:pl-2 transition-all">
+                <li className="text-lg md:text-lg text-primary font-medium md:my-0 hover:pl-2 transition-all">
                   {item.name}
                 </li>
                 </Link>
@@ -56,24 +56,26 @@ export default function Home(props) {
           </ul>
         </div>
         <div className="hidden lg:block w-1/3">
-          <img className="pt-5 ml-28 w-3/4 " src="/assets/Home/HomeIcon.svg"/>
+          <img className="pt-5 ml-28 w-2/4 " src="/assets/Home/HomeIcon.svg"/>
         </div>
       </div>
       <hr className="mt-10 border-dashed border-1" />
       <div className="mt-10" id="contribute">
-      <h1 className="text-2xl md:text-4xl font-medium tracking-tight">
+      <h1 className="text-2xl md:text-2xl font-medium tracking-tight">
             Feel Free to Contribute
           </h1>
-          <p className="text-lg md:text-2xl mt-5 text-gray-400 md:leading-10">
+          <p className="text-lg md:text-lg mt-1 text-gray-400 md:leading-10">
             Feel free to contribute by raising an issue or a PR.
           </p> 
           <Link href="https://github.com/Campus-Circle">
-          <button className="flex bg-primary p-3 mt-4 rounded-lg shadow-lg hover:bg-secondary hover:shadow-sm transition-all focus:outline-black">
+          <button className="flex bg-primary p-4 mt-4 rounded-lg shadow-md
+          shadow-primary/20 hover:shadow-primary/30
+           hover:shadow-xl hover:-translate-y-2 transition-all focus:outline-black">
             <span className="self-center text-xl text-white font-medium">
               Contribute on
             </span>
             <img
-              className="ml-3 w-12"
+              className="ml-3 w-8 self-center"
              src="/assets/Socials/GitHubWhite.svg"/>
           </button>
           </Link>
