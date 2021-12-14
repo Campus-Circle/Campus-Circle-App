@@ -26,14 +26,14 @@ function Index({data, college}) {
       </div>    )
 }
 
-export async function getStaticProps(props) {
-    const { data } = await axios.get(`${process.env.URL}/placements/index.json`);
+export async function getServerSideProps(context) {
+  const { data } = await axios.get(`${process.env.URL}/placements/index.json`);
     const college = process.env.COLLEGE;
     return {
       props: {
         data: data,
         college: college
-      }, revalidate: 20,
+      }
     };
   }
   

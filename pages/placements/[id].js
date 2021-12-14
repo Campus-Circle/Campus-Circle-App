@@ -28,19 +28,8 @@ function Placement({id,data}) {
 
 export default Placement
 
-export async function getStaticPaths() {
-    const {data} = await axios.get(`${process.env.URL}/placements/index.json`)
-
-    const paths = data.map((item) => ({ params: { id: item.name } }));
-    console.log(paths)
-    return {
-        paths,
-        fallback: false,
-    };
-}
-
-export async function getStaticProps({ params }){
-    const id = params.id;
+export async function getServerSideProps(context) {
+    const { id } = context.query;
 
     const {data} = await axios.get(`${process.env.URL}/placements/${id}.md`);
 
@@ -48,6 +37,6 @@ export async function getStaticProps({ params }){
         props: {
             "data" : data,
             "id" : id
-        }, revalidate: 20,
+        }
     }
 }

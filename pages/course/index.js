@@ -27,7 +27,7 @@ function index({ data, college }) {
   );
 }
 
-export async function getStaticProps(props) {
+export async function getServerSideProps(context) {
   
   console.log(process.env.URL)
   const { data } = await axios.get(`${process.env.URL}/course/index.json`);
@@ -39,7 +39,7 @@ export async function getStaticProps(props) {
     props: {
       data: data,
       college: college
-    }, revalidate: 20,
+    }
   };
 }
 

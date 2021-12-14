@@ -22,18 +22,17 @@ function index({ data }) {
   );
 }
 
-export async function getStaticProps(props) {
+export async function getServerSideProps(context) {
   
   console.log(process.env.URL)
   const { data } = await axios.get(`${process.env.URL}/notes/index.json`);
-
 
   console.log(data)
 
   return {
     props: {
       data: data,
-    },
+    }
   };
 }
 

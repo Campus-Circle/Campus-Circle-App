@@ -28,20 +28,9 @@ function Course({course,syllabus}) {
     )
 }
 
-export async function getStaticPaths() {
-    const {data} = await axios.get(`${process.env.URL}/course/index.json`)
 
-    const paths = data.map((item) => ({ params: { id: item.url } }));
-    console.log(paths)
-    return {
-        paths,
-        fallback: false,
-    };
-}
-
-
-export async function getStaticProps({ params }){
-    const id = params.id;
+export async function getServerSideProps(context) {
+    const { id } = context.query;
 
     const {data} = await axios.get(`${process.env.URL}/course/index.json`);
 
@@ -56,7 +45,7 @@ export async function getStaticProps({ params }){
         props:{
             course : course[0],
             syllabus : syllabus.data
-        }, revalidate: 20,
+        }
     }
 }
 
