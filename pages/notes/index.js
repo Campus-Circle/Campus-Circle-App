@@ -5,7 +5,7 @@ import Link from "next/link";
 function index({ data }) {
   console.log(data);
   return (
-    <div className="w-full h-screen flex flex-col justify-center items-center">
+    <div className="w-full h-screen flex flex-col items-center pt-5">
       <h1 className="text-4xl font-body font-semibold text-primary">Notes</h1>
       <ul className="items-center font-body">
         {data.map((item, index) => {

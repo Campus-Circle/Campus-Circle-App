@@ -42,14 +42,15 @@ function Navbar({Close,setClose}) {
 
   const Socials = [
     {
+      name: "Github",
       link:"https://github.com/Campus-Circle",
       src: "/assets/Socials/GitHub.svg",
     },
     {
+      name: "Instagram",
       link:"https://www.instagram.com/jmicampuscircle/",
       src: "/assets/Socials/Instagram.svg",
     },
-
   ];
 
   function ChangeClose() {
@@ -71,8 +72,7 @@ function Navbar({Close,setClose}) {
         style={{
             transform: Close ? "rotate(180deg)" : null,
             left: Close ? "6rem" : null
-        }}
-      >
+        }}>
         <img className="w-12" src="/assets/Navbar/Back.svg" />
       </button>
       <img 
@@ -81,13 +81,12 @@ function Navbar({Close,setClose}) {
         style={{
             paddingLeft: Close ? "1rem" : null,
             width: Close ? "5rem" : null
-         }}
-      />
+         }}/>
 
       <ul className="flex-grow">
         {TopNav.map((item, index) => {
           return (
-            <Link href={item.link}>
+            <Link key={item.id} href={item.link}>
             <li 
             className="flex p-3 m-4 my-2 font-body text-primary rounded-md cursor-pointer hover:bg-white hover:bg-opacity-40 border-2 border-transparent transition-all"
             style={{
@@ -109,37 +108,17 @@ function Navbar({Close,setClose}) {
         })}
       </ul>
 
-      <ul>
-        <Link href="/contact">
-        <li className="flex p-3 m-4 my-6 mb-4 font-body text-primary rounded-md cursor-pointer hover:bg-white hover:bg-opacity-40 border-2 border-transparent"
-          style={{
-            backgroundColor: (router.pathname == "/contact") ? 'white' : null
-          }}
-        >
-          <img className="w-5" src="/assets/Navbar/Phone.svg" />
-          <div className="self-center text-xl font-medium pl-4"
-          style={{
-              display: Close ? "none" : null
-          }}>
-            Contact Us
-          </div>
-        </li>
-        </Link>
-      </ul>
-      <div class="flex p-3 m-4 mt-0 font-body bg-white rounded-lg transition-all">
+      <div className="flex p-3 m-4 mt-0 font-body bg-white rounded-lg transition-all shadow-md shadow-gray/10">
         <ul className="flex" 
-            style={{
-                flexDirection : Close ? "column" : null
-            }}
-        >
+            style={{ flexDirection : Close ? "column" : null }}>
           {Socials.map((item, index) => {
             return (
-              <Link href={item.link}>
-              <li className="transition-all" style={{
-                  paddingTop : Close ? "0.5rem" : null
-              }}>
-                <img className="w-16 mr-3" src={item.src} />
-              </li>
+              <Link key={item.link} href={item.link}>
+                <li className="transition-all" style={{
+                    paddingTop : Close ? "0.5rem" : null
+                }}>
+                  <img alt={item.name} className="w-12 mr-3" src={item.src} />
+                </li>
               </Link>
             );
           })}
