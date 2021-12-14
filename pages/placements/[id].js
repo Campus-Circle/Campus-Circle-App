@@ -48,6 +48,6 @@ export async function getStaticProps({ params }){
         props: {
             "data" : data,
             "id" : id
-        }
+        }, revalidate: 20,
     }
 }

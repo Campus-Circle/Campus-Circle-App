@@ -1,7 +1,7 @@
 import React from "react";
 import Script from "next/script";
-
 import Link from "next/link";
+import Head from "next/head";
 
 function Index() {
 
@@ -17,9 +17,13 @@ function Index() {
 
   ];
 
-
   return (
     <div className="w-full  font-body">
+    <Head>
+      <title>{ `Contact Us` }</title>
+      <meta name="og:title" content={ `Contact Us` } />
+      <meta name="twitter:title" content={ `Contact Us` } />
+    </Head>
       <Script src="https://static.airtable.com/js/embed/embed_snippet_v1.js" />
       <div className="flex p-4 flex-col md:flex-row">
         <div className="md:w-1/2 md:pl-28 md:pt-20">
@@ -29,7 +33,7 @@ function Index() {
             <ul>
                 {['alamsarfraz422@gmail.com','+91-7303435034'].map((item,index) => {
                     return (
-                        <li className="font-medium pl-3 pt-2 text-gray-500">
+                        <li key={item} className="font-medium pl-3 pt-2 text-gray-500">
                             {item}
                         </li>
                     )
@@ -39,7 +43,7 @@ function Index() {
             <ul className="flex"   >
           {Socials.map((item, index) => {
             return (
-              <Link href={item.link}>
+              <Link key={item.link} href={item.link}>
               <li className="transition-all">
                 <img className="w-16 mr-3" src={item.src} />
               </li>
@@ -50,10 +54,9 @@ function Index() {
         </div>
         <div className="md:w-1/2">
           <iframe
-            class="airtable-embed airtable-dynamic-height"
+            className="airtable-embed airtable-dynamic-height"
             src="https://airtable.com/embed/shrxTM9zeV7oAp4Rg?backgroundColor=orange"
-            frameborder="0"
-            onmousewheel=""
+            frameBorder="0"
             width="100%"
             height="756"
           ></iframe>
@@ -64,3 +67,4 @@ function Index() {
 }
 
 export default Index;
+

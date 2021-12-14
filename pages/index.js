@@ -1,8 +1,7 @@
 import Head from "next/head";
-
 import Link from "next/link";
 
-export default function Home(props) {
+export default function Home({college}) {
 
   const TopNav = [
     {
@@ -28,14 +27,17 @@ export default function Home(props) {
 
   return (
     <div className="flex flex-col p-4 md:pl-16 md:pt-20 min-h-screen py-2 transition-all font-body">
+      <Head>
+        <title>{ `Campus Circle - ${college}` }</title>
+        <meta name="og:title" content={ `Campus Circle - ${college}` } />
+        <meta name="twitter:title" content={ `Campus Circle - ${college}` } />
+      </Head>
       <div className="flex" id="welcometocampuscircle">
         <div className="md:w-2/3 flex-grow">
           <h1 className="text-2xl mt-6 md:text-4xl font-medium tracking-tight">
             Welcome to Campus Circle
           </h1>
-          <h3 className="text-primary">
-            {props.college}
-          </h3>
+          <h3 className="text-primary">{college}</h3>
           <p className=" text-lg md:ext-2xl mt-5 text-gray-400 md:leading-10">
             College Circle is a platform where students can stay updated of
             everything around Campus.
@@ -46,10 +48,10 @@ export default function Home(props) {
           <ul className="border-l-2 pl-5 my-4">
             {TopNav.map((item,index) => {
               return(
-                <Link href={item.link}>
-                <li className="text-lg md:text-2xl text-primary font-medium md:my-2 hover:pl-2 transition-all">
-                  {item.name}
-                </li>
+                <Link key={item.id} href={item.link}>
+                  <li className="text-lg md:text-2xl text-primary font-medium md:my-2 hover:pl-2 transition-all cursor-pointer">
+                    {item.name}
+                  </li>
                 </Link>
               )
             })}
@@ -90,6 +92,6 @@ export async function getStaticProps(){
   return{
     props:{
       college : college
-    }
+    }, revalidate: 20, // revalidation of the static data after 20 seconds
   }
 }
