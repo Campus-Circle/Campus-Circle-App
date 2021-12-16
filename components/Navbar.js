@@ -61,7 +61,7 @@ function Navbar({Close,setClose}) {
 
   return (
     <div 
-        className="fixed md:block left-0 top-0 bg-gray-100 w-60 md:w-64 md:h-screen border-r-2 flex flex-col transition-all"
+        className="fixed hidden md:block left-0 top-0 bg-gray-100 w-60 md:w-64 md:h-screen border-r-2  flex-col transition-all"
         style={{
             width: Close ? "6rem" : null
         }}
