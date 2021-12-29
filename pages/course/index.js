@@ -1,9 +1,14 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import Head from "next/head";
 
+import {useSelector} from "react-redux";
+
 function index({ data, college }) {
+
+
+
   return (
     <div className="w-full h-screen flex flex-col justify-start items-center pt-5">
       <Head>

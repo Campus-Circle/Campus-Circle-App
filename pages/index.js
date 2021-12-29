@@ -1,5 +1,8 @@
+import { useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
+import { useSelector ,useDispatch } from "react-redux";
+import { increment } from "../redux/counter/counterSlice";
 
 export default function Home({college}) {
 
@@ -24,6 +27,14 @@ export default function Home({college}) {
     },
   ];
 
+  const state = useSelector(state => state.auth);
+  const counter = useSelector(state => state.counter)
+  const dispatch = useDispatch();
+  
+
+  useEffect(() => {
+    console.log(state);
+    },[state]);
 
   return (
     <div className="flex flex-col p-4 md:pl-16 md:pt-20 min-h-screen py-2 transition-all font-body">
@@ -35,7 +46,7 @@ export default function Home({college}) {
       <div className="flex" id="welcometocampuscircle">
         <div className="md:w-2/3 flex-grow">
           <h1 className="text-2xl mt-6 md:text-3xl font-medium tracking-tight">
-            Welcome to Campus Circle
+            Welcome to Campus Circle 
           </h1>
           <h3 className="text-primary">{college}</h3>
           <p className=" text-lg md:ext-2xl mt-5 text-gray-400 md:leading-10">
