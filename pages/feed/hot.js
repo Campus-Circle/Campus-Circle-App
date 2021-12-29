@@ -6,7 +6,7 @@ import { AiFillFire, AiTwotoneWarning, AiOutlinePlus } from "react-icons/ai";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import Post from "./Postcard";
+import Post from "..//../components/Postcard";
 
 import Link from "next/link";
 
