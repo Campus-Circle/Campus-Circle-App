@@ -5,6 +5,8 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import {useSelector , useDispatch} from 'react-redux'
 
 import axios from 'axios';
+import Loading from '../../components/Loading';
+
 
 function Student({URL}) {
     
@@ -91,7 +93,10 @@ function Student({URL}) {
             </Formik>
             <hr />
 
+
+
             <div className="w-11/12 border-t pt-6">
+                
                 <table className="w-full font-body">
                     <thead className='bg-primary'>
                         <tr className=''>
@@ -105,6 +110,7 @@ function Student({URL}) {
                         </tr>
                     </thead>
                     <tbody>
+
                     {StudentList.map((student) => {
                             return (
                                 <tr className="text-center">
@@ -117,6 +123,9 @@ function Student({URL}) {
                         })}
                     </tbody>
                 </table>
+                {StudentList.length === 0 ? <div className="text-center mt-5 w-full font-body italic text-gray-400">
+                Sorry! No record exists
+                </div>: null}
             </div>
         </div>
     )

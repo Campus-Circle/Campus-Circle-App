@@ -12,12 +12,16 @@ import {useSelector , useDispatch} from 'react-redux'
 import { setToken , setUser } from '../../redux/counter/auth';
 import { useRouter } from 'next/router'
 
+import {AiOutlineLoading3Quarters} from 'react-icons/ai'
+
 import Link from "next/link";
 
 function Login({URL}) {
   const router = useRouter();
 
   const [Disabled,setDisabled] = useState(true);
+
+  const [Processing, setProcessing] = useState(false);
 
   const dispatch = useDispatch();
   const state = useSelector(state => state.auth);
@@ -47,8 +51,8 @@ function Login({URL}) {
         }}
 
         onSubmit={async (values) => {
-          alert(JSON.stringify(values, null, 2));
-
+          // alert(JSON.stringify(values, null, 2));
+          setProcessing(true);
           axios.post(`${URL}/auth/login`, values)
           .then(res => {
             // alert(JSON.stringify(res.data));
@@ -64,12 +68,13 @@ function Login({URL}) {
             localStorage.setItem('CampusAuth', JSON.stringify(authstate));
             
             toast.success("Login Successful");
-
+            setProcessing(false)
             setTimeout(() => {
               router.push('/')
             }, 1000);
           })
           .catch(err => {
+            setProcessing(false)
             toast.error(err.response.data.message);
           });
 
@@ -97,7 +102,10 @@ function Login({URL}) {
           opacity: Disabled ? 0.5 : 1,
         }}
         > 
-          Sign In
+          {Processing ? <div className="text-white flex">
+            <AiOutlineLoading3Quarters className="self-center mx-1 animate-spin"/>
+            <span className="self-center">Processing</span>
+          </div> : "Sign In"}
         </button>
         <div className="mt-5">
           <span className="text-sm text-gray-800/50">Don't have an account?</span>

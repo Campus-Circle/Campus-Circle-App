@@ -10,6 +10,8 @@ import Post from "..//../components/Postcard";
 
 import Link from "next/link";
 
+import Loading from "../../components/Loading";
+
 function Feed({ URL }) {
   const state = useSelector((state) => state.auth);
   const [postFeed, setFeed] = useState([]);
@@ -21,7 +23,8 @@ function Feed({ URL }) {
         }
     }).then(res => {
 
-    }).catch(err => {
+    }).catch(err => {Loading
+      Loading
         alert("NOT OK")
         if(err.response.status === 403){
             window.location.href = '/auth/login'
@@ -83,6 +86,8 @@ function Feed({ URL }) {
         </li>
         </Link>
       </ul>
+
+      {postFeed === [] ?  <Loading /> : null}
 
       {postFeed.map((item, index) => {
         return <Post item={item} index={index} />;

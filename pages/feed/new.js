@@ -10,6 +10,8 @@ import Post from "../../components/Postcard";
 
 import Link from "next/link";
 
+import Loading from "../../components/Loading";
+
 function Feed({ URL }) {
   const state = useSelector((state) => state.auth);
   const [postFeed, setFeed] = useState([]);
@@ -77,6 +79,8 @@ function Feed({ URL }) {
           </li>
         </Link>
       </ul>
+
+      {postFeed === []? <Loading/> : null}
 
       {postFeed.map((item, index) => {
         return <Post item={item} index={index} />;
