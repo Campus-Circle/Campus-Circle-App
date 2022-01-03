@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from 'next/router'
 
 import Link from 'next/link'
+import {BiDoorOpen,BiLogIn} from 'react-icons/bi'
+import {useSelector, useDispatch} from 'react-redux'
 
 function Navbar({Close,setClose}) {
 
   const router = useRouter();
+
+  const dispatch = useDispatch();
+
+  const auth = useSelector(state => state.auth);
 
   const TopNav = [
     {
@@ -37,6 +43,18 @@ function Navbar({Close,setClose}) {
       name: "Notes",
       src: "/assets/Navbar/Notes.svg",
       link: '/notes'
+    },
+    {
+      id: 6,
+      name: "Feed",
+      src: "/assets/Navbar/Annotation.svg",
+      link: '/feed/hot'
+    },
+    {
+      id: 7,
+      name: "Students List",
+      src: "/assets/Navbar/ClipboardList.svg",
+      link: '/student'
     }
   ];
 
@@ -57,6 +75,9 @@ function Navbar({Close,setClose}) {
     setClose(!Close);
   }
 
+  useEffect(() => {
+    
+  }, [])
 
 
   return (
@@ -88,14 +109,14 @@ function Navbar({Close,setClose}) {
           return (
             <Link key={item.id} href={item.link}>
             <li 
-            className="flex p-3 m-4 my-2 font-body text-primary rounded-md cursor-pointer hover:bg-white hover:bg-opacity-40 border-2 border-transparent transition-all"
+            className="flex p-2 m-4 my-1 font-body text-primary rounded-md cursor-pointer hover:bg-white hover:bg-opacity-40 border-2 border-transparent transition-all"
             style={{
               backgroundColor: (router.pathname == item.link) ? 'white' : null,
             }}
             >
-              <img className="w-5" src={item.src} />
+              <img className="w-4" src={item.src} />
               <div 
-                className="self-center text-xl font-medium pl-4 transition-all"
+                className="self-center text-lg font-medium pl-4 transition-all"
                 style={{
                     display: Close ? "none" : null,
                 }}
@@ -123,7 +144,25 @@ function Navbar({Close,setClose}) {
             );
           })}
         </ul>
+        
       </div>
+
+      {
+        auth.token !== '' ?
+        <button className="flex font-body font-semibold px-4 py-2 bg-primary/70 ml-6 rounded-lg text-white hover:bg-primary transition-all" onClick={() => {
+        localStorage.removeItem('CampusAuth');
+        window.location.href = '/';
+      }}>
+          <BiDoorOpen className="self-center" />
+          Logout
+      </button> : 
+      <Link href="/auth/login">
+        <button className="flex font-body font-semibold px-4 py-2 bg-primary/70 ml-6 rounded-lg text-white hover:bg-primary transition-all">
+          <BiLogIn className="self-center" />
+          Login
+        </button>
+      </Link>
+      }
     </div>
   );
 }
