@@ -63,9 +63,9 @@ function Navbar({ Close, setClose }) {
   ];
 
   return (
-    <div className="flex md:hidden fixed transition-all"
+    <div className="flex md:hidden fixed transition-all h-14 z-50"
       style={{
-        transform: Open? "translateX(0)" : "translateX(-80%)",
+        transform: Open? "translateX(0)" : "translateX(-82%)",
       }}
     >
       <div className="bg-gray-100/80 px-8 backdrop-blur-sm h-screen font-body">
@@ -93,7 +93,7 @@ function Navbar({ Close, setClose }) {
         </div>
       </div>
 
-      <div className="bg-gray-50 shadow-lg shadow-primary/20 rounded-r-full h-14 flex">
+      <div className="bg-gray-50  shadow-lg shadow-primary/20 rounded-r-full h-14 flex">
         <MdDoubleArrow
           className="text-3xl text-primary m-3 transition-all self-center"
           style={{

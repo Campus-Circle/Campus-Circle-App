@@ -65,13 +65,15 @@ function Post(props) {
                 </span>
             </span>
             <p className='mt-1 text-base  text-gray-500 tracking-tight'>{props.item.description}</p>
-            <div className='flex mt-3'>
+            <div className='flex mt-3 cursor-pointer'>
                 {!Like ? 
-                <AiOutlineLike className='text-primary text-2xl cursor-pointer' onClick={LikePost}/>
+                <AiOutlineLike className='text-primary text-3xl md:text-2xl cursor-pointer' onClick={LikePost}/>
                 :
-                <AiFillLike className='text-primary text-2xl  cursor-pointer' onClick={DislikePost}/>
+                <button onClick={DislikePost}>
+                <AiFillLike className='text-primary text-3xl md:text-2xl  cursor-pointer' />
+                </button>
                 }
-                <span className='self-center ml-1 font-semibold text-primary'>
+                <span className='self-center ml-1 font-semibold text-primary text-xl md:text-base'>
                     {LikeCount}
                 </span>
             </div>
