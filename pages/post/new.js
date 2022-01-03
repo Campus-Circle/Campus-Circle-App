@@ -66,7 +66,7 @@ function Post({URL}) {
                 }}
 
             >
-                <Form className="flex flex-col justify-center items-center font-body  px-8 py-8 w-2/3">
+                <Form className="flex flex-col justify-center items-center font-body  px-8 py-8 md:w-2/3">
                     <h1 className="tracking-tight text-2xl my-3 text-primary  font-semibold">
                         Create New Post
                     </h1>

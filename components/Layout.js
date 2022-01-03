@@ -40,6 +40,8 @@ function Layout({children}) {
                     }}
                 />
 
+                <div className='md:hidden flex h-10'/>
+
                 
                 <NavbarMobile />
                 {children}

@@ -69,6 +69,9 @@ function Navbar({ Close, setClose }) {
       }}
     >
       <div className="bg-gray-100/80 px-8 backdrop-blur-sm h-screen font-body">
+        <div className="my-3">
+          <img src="/assets/CampusCircle.svg" />
+        </div>
         {TopNav.map((item, index) => {
           return (
             <Link key={item.name} href={item.link}>
