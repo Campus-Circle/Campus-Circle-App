@@ -6,7 +6,7 @@ import { AiFillFire, AiTwotoneWarning, AiOutlinePlus } from "react-icons/ai";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import Post from "..//../components/Postcard";
+import Post from "../../components/Postcard";
 
 import Link from "next/link";
 
@@ -15,24 +15,19 @@ import Loading from "../../components/Loading";
 function Feed({ URL }) {
   const state = useSelector((state) => state.auth);
   const [postFeed, setFeed] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.post(`${URL}/validate`,null,{
-        headers: {
-            Authorization: `Bearer ${state.token}`
-        }
-    }).then(res => {
+    if(state.isAuth == true)
+    {
+        setLoading(false);
+    }else{
+      alert('Please Login First');
+      window.location.href = '/auth/login';  
+      setLoading(true);
 
-    }).catch(err => {Loading
-      Loading
-        alert("NOT OK")
-        if(err.response.status === 403){
-            window.location.href = '/auth/login'
-        }
-    })
-}, [])
-
-
+    }
+  }, []);
 
   useEffect(async () => {
     axios
@@ -46,10 +41,17 @@ function Feed({ URL }) {
         setFeed(res.data.data);
       })
       .catch((err) => {
-        alert(err);
         console.log(err);
       });
   }, []);
+
+  if (loading === true) {
+    return (
+      <div className="w-full h-screen">
+        <Loading />
+      </div>
+    );
+  }
 
   return (
     <div className="md:ml-20 mt-8 w-full font-body">
@@ -58,7 +60,6 @@ function Feed({ URL }) {
       </h1>
 
       <ul className="flex mt-6">
-        
         <Link href="/feed/hot" className="">
           <li className="flex px-5 mr-4 py-2 cursor-pointer border  border-primary rounded-full">
             <AiFillFire className="text-primary self-center" />
@@ -78,19 +79,17 @@ function Feed({ URL }) {
         </Link>
         <li className="flex-grow"></li>
         <Link href="/post/new">
-        <li className="px-5 py-2 bg-primary mr-5 rounded-full text-white shadow-sm transition-all cursor-pointer hover:shadow-lg font-semibold flex">
-          <AiOutlinePlus className="self-center text-lg mx-1" />
-          <span>
-            Create a Post
-          </span>
-        </li>
+          <li className="px-5 py-2 bg-primary mr-5 rounded-full text-white shadow-sm transition-all cursor-pointer hover:shadow-lg font-semibold flex">
+            <AiOutlinePlus className="self-center text-lg mx-1" />
+            <span>Create a Post</span>
+          </li>
         </Link>
       </ul>
 
-      {postFeed === [] ?  <Loading /> : null}
+      {postFeed === [] ? <Loading /> : null}
 
       {postFeed.map((item, index) => {
-        return <Post item={item} index={index} />;
+        return <Post item={item} index={index} URL={URL}/>;
       })}
     </div>
   );

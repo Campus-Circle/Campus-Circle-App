@@ -1,6 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk ,createSlice } from "@reduxjs/toolkit";
 
 let initialState = {
+  isAuth: false,
   token: "",
   user: {
     id: "",
@@ -25,9 +26,12 @@ const authSlice = createSlice({
     setUser: (state, action) => {
       state.user = action.payload;
     },
+    setAuth: (state, action) => {
+      state.isAuth = action.payload;
+    }
   },
 });
 
-export const { setToken, setUser } = authSlice.actions;
+export const { setToken, setUser,setAuth } = authSlice.actions;
 
 export default authSlice.reducer;

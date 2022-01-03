@@ -40,9 +40,6 @@ function Layout({children}) {
                     }}
                 />
 
-                <div 
-                    className="h-16 md:hidden"
-                />
                 
                 <NavbarMobile />
                 {children}

@@ -39,7 +39,7 @@ function Post({URL}) {
                 }}
 
                 onSubmit={async (values) => {
-                    alert(JSON.stringify(values, null, 2));
+                    // alert(JSON.stringify(values, null, 2));
 
                     axios.post(`${URL}/post/add`, {
                         title: values.title,

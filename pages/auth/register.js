@@ -5,9 +5,12 @@ import { Formik, Field, Form } from 'formik';
 import axios from "axios";
 
 import {useSelector ,useDispatch} from 'react-redux'
+import { setToken , setUser } from "../../redux/counter/auth";
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import {AiOutlineLoading3Quarters} from 'react-icons/ai'
 import { useRouter } from 'next/router'
 
 import Link from "next/link";
@@ -18,6 +21,7 @@ function Login({URL}) {
   const router = useRouter();
 
   const [Disabled,setDisabled] = useState(true);
+  const [SignIn, setSignIn] = useState(false);
 
   const dispatch = useDispatch();
   const state = useSelector(state => state.auth);
@@ -39,40 +43,51 @@ function Login({URL}) {
         validate={values => {
           const errors = {};
 
-
           if( values.email === '' || values.password == '' || values.branch === '' || values.year === '' || values.name === '' || values.confirmpassword !== values.password ){
-            setDisabled(true);
-
+            setSignIn(false);
           }else{
             setDisabled(false);
           }
         }}
 
         onSubmit={async (values) => {
+          setSignIn(true);
           if(values.password !== values.confirmpassword) {
             alert("Passwords do not match");
+            setSignIn(false);
             return;
           }
           else if(values.password.length < 6) {
             alert("Password must be at least 6 characters");
+            setSignIn(false);
             return;
           }
         
-          alert(JSON.stringify(values, null, 2));
-          alert(JSON.stringify(process.env, null, 2))
           axios.post(`${URL}/auth/signup`, values)
           .then(res => {
-            // alert(res.data);
-
+            setSignIn(false);
             toast.success("Successfully Registered");
+            dispatch(setToken(res.data.token));
+            dispatch(setUser(res.data.user));
+
+            const authstate = {
+              isAuth: true,
+              token: res.data.token,
+              user: res.data.user
+            }
+
+            localStorage.setItem('CampusAuth', JSON.stringify(authstate));
+
+
 
             setTimeout(() => {
-              router.push('/auth/login')
+              router.push('/')
             }, 2000);
 
           }).catch(err => {
             // alert(err);
-            toast.error("Error Registering");
+            setSignIn(false);
+            toast.error(err.response.data.message);
           });
 
         }}
@@ -128,7 +143,14 @@ function Login({URL}) {
         }}
 
         > 
-          Sign In
+          {
+          SignIn == false ? 
+          "Sign In" : 
+          <div className="flex">
+            <AiOutlineLoading3Quarters className="w-6 h-6 mx-2 animate-spin" />
+            <span>Processing</span>
+          </div>
+          }
         </button>
         <div className="mt-5">
           <span className="text-sm text-gray-800/50">Already have an account?</span>

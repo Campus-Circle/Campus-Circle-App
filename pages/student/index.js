@@ -6,11 +6,18 @@ import {useSelector , useDispatch} from 'react-redux'
 
 import axios from 'axios';
 import Loading from '../../components/Loading';
+import LoginFirst from "../../components/LoginFirst";
+import {AiOutlineLoading3Quarters} from 'react-icons/ai'
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function Student({URL}) {
     
     const [StudentList,setStudentList] = useState([]);
+    const [loading,setLoading] = useState(true);
+    const [submit, setSubmit] = useState(false);
 
     const auth = useSelector(state => state.auth)
 
@@ -20,21 +27,23 @@ function Student({URL}) {
     
     useEffect(() => {
 
-        console.log(config)
-        console.log(auth.token)
-        axios.post(`${URL}/validate`, {
-            key: 'value'
-        } ,config).then(res => {
-            
-        }).catch(err => {
-            console.log(err.response.data)
-            alert("Please Sign In First!")
-            if(err.response.status === 403){
-                window.location.href = '/auth/login'
-            }
-        })
+        if(auth.isAuth == true)
+        {
+            setLoading(false);
+        }else{
+            alert('Please Login First');
+            window.location.href = '/auth/login';  
+            setLoading(true);
+        }
     }, [])
 
+    if(loading === true){
+        return(
+            <div className='w-full h-screen'>
+                <Loading/>
+            </div>
+        )
+    }
 
     return (
         <div className='flex flex-col justify-center items-center w-full py-5'>
@@ -45,6 +54,7 @@ function Student({URL}) {
                 }}
                 onSubmit={async (values) => {
                     console.log(values);
+                    setSubmit(true);
                     console.log(JSON.stringify(config));
                     axios.get(`${URL}/find/${values.branch}/${values.year}`,{
                         headers: {
@@ -53,9 +63,13 @@ function Student({URL}) {
                     }).then((res) => {
                         console.log(res.data.data);
                         setStudentList(res.data.data);
+                        setSubmit(false);
+                        toast.success('Successfully Fetched Students');
                     }).catch((err) => {
+
+                        setSubmit(false);
                         console.log(err.response.data);
-                        alert('Error');
+                        toast.error("Error Occured");
                     });
                 }}
             >
@@ -86,7 +100,14 @@ function Student({URL}) {
                     </Field>
                     </div>
                     <button className="my-4 px-4 py-3 shadow-lg bg-gray-100 rounded-md border-2 border-primary text-primary font-semibold">
-                        Submit
+                        {
+                            submit === false ?
+                        "Submit" : 
+                        <div className='flex opacity-50'>
+                        <AiOutlineLoading3Quarters className="w-6 h-6 animate-spin mx-2"/>
+                        <span>Processing</span>
+                        </div>
+                        }
                     </button>
                 </Form>
 
@@ -127,6 +148,7 @@ function Student({URL}) {
                 Sorry! No record exists
                 </div>: null}
             </div>
+            <ToastContainer />
         </div>
     )
 }

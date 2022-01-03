@@ -15,19 +15,18 @@ import Loading from "../../components/Loading";
 function Feed({ URL }) {
   const state = useSelector((state) => state.auth);
   const [postFeed, setFeed] = useState([]);
+  const [loading,setLoading] = useState(true);
 
   useEffect(() => {
-    axios.post(`${URL}/validate`,null,{
-        headers: {
-            Authorization : `Bearer ${state.token}`
-        }
-    }).catch(err => {
-      alert("Please Sign In First!")
-      if(err.response.status === 403){
-            window.location.href = '/auth/login'
-        }
-    })
-}, [])
+    if(state.isAuth == true)
+    {
+        setLoading(false);
+    }else{
+      alert('Please Login First');
+      window.location.href = '/auth/login';  
+        setLoading(true);
+    }
+  }, [])
 
 
 
@@ -47,6 +46,14 @@ function Feed({ URL }) {
         console.log(err);
       });
   }, []);
+
+  if (loading === true) {
+    return (
+      <div className="w-full h-screen">
+        <Loading />
+      </div>
+    );
+  }
 
   return (
     <div className="md:ml-20 mt-8 w-full font-body">
@@ -83,7 +90,7 @@ function Feed({ URL }) {
       {postFeed === []? <Loading/> : null}
 
       {postFeed.map((item, index) => {
-        return <Post item={item} index={index} />;
+        return <Post item={item} index={index} URL={URL}/>;
       })}
     </div>
   );

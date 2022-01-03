@@ -31,7 +31,7 @@ function Login({URL}) {
   }, [state]);
 
   return (
-    <div className="w-full font-body md:pl-16 flex flex-col h-full">
+    <div className="w-full font-body md:pl-16 flex flex-col h-screen md:h-auto ">
       <img className="fixed scale-110 -z-50 w-screen h-screen top-0 left-0" src="/assets/bg.svg"/>
       <Formik
         initialValues={{
@@ -61,6 +61,7 @@ function Login({URL}) {
             dispatch(setUser(res.data.user));
 
             const authstate = {
+              isAuth: true,
               token: res.data.token,
               user: res.data.user
             }
@@ -80,8 +81,8 @@ function Login({URL}) {
 
         }}
       >
-      <Form className="md:p-5  pt-20 md:pb-10 rounded-b-lg shadow-2xl shadow-white/20 bg-slate-50 md:w-1/2 flex flex-col justify-center items-center">
-        <h2 className="text-3xl pb-12 font-bold text-primary">
+      <Form className="md:p-5   pt-20 md:pb-10 rounded-b-lg shadow-2xl shadow-white/20 bg-slate-50 md:w-1/2 flex flex-col justify-center items-center flex-grow">
+        <h2 className="text-3xl pb-12 font-bold text-primary ">
           Sign In
         </h2>
           <label className="flex flex-col my-3 md:mr-5">

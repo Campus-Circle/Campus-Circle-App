@@ -2,9 +2,10 @@ import { useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { useSelector ,useDispatch } from "react-redux";
-import { increment } from "../redux/counter/counterSlice";
+import { setAuth } from "../redux/counter/auth";
+import axios from "axios";
 
-export default function Home({college}) {
+export default function Home({college,URL}) {
 
   const TopNav = [
     {
@@ -27,14 +28,27 @@ export default function Home({college}) {
     },
   ];
 
-  const state = useSelector(state => state.auth);
+  const auth = useSelector(state => state.auth);
   const counter = useSelector(state => state.counter)
   const dispatch = useDispatch();
-  
 
+      
   useEffect(() => {
-    console.log(state);
-    },[state]);
+    
+    const config = {
+      headers: { Authorization: `Bearer ${auth.token}` }
+    };
+
+    axios.post(`${URL}/validate`, {
+        key: 'value'
+    } ,config).then(res => {   
+        dispatch(setAuth(true));
+    }).catch(err => {
+        console.log(err.response.data)    
+    })
+  }, [auth])
+
+
 
   return (
     <div className="flex flex-col p-4 md:pl-16 md:pt-20 min-h-screen py-2 transition-all font-body">
@@ -99,12 +113,14 @@ export default function Home({college}) {
 
 export async function getStaticProps(){
   const college = process.env.COLLEGE;
+  const URL = process.env.API
 
   console.log(college)
 
   return{
     props:{
-      college : college
+      college : college,
+      URL : URL
     }, revalidate: 20, // revalidation of the static data after 20 seconds
   }
 }
