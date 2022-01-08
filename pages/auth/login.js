@@ -30,6 +30,18 @@ function Login({URL}) {
     console.log(state)
   }, [state]);
 
+  const forgotPassword = async () => {
+    try {
+      const res = await axios.post(`${URL}/auth/forgot-password`, {
+        email: state.email
+      });
+      toast.success("Reset Link Sent Successfully, Please Check Your Email");
+    } catch(err) {
+      console.log(err.response.data)
+      toast.error('Something went wrong');
+    }
+  }
+
   return (
     <div className="w-full font-body md:pl-16 flex flex-col h-screen md:h-auto ">
       <img className="fixed scale-110 -z-50 w-screen h-screen top-0 left-0" src="/assets/bg.svg"/>
@@ -108,6 +120,17 @@ function Login({URL}) {
             <span className="self-center">Processing</span>
           </div> : "Sign In"}
         </button>
+        <div className="my-2">
+        <span className="text-sm text-gray-800/50">Forgot Password?</span>
+        <span className="text-primary cursor-pointer text-sm ml-2 font-semibold" 
+          onClick={async () => {
+            await forgotPassword();
+          }}
+        >
+          Reset Password
+          </span>
+
+        </div>
         <div className="mt-5">
           <span className="text-sm text-gray-800/50">Don't have an account?</span>
           <Link href="/auth/register">

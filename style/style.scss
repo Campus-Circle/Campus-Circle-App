@@ -11,7 +11,7 @@
             @apply rounded-l-md;
         }
 
-        th:nth-child(3){
+        th:last-child{
             @apply rounded-r-md;
         }
 

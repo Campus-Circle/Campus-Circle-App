@@ -63,14 +63,28 @@ function Navbar({ Close, setClose }) {
   ];
 
   return (
+    <>
+    <div 
+      className="fixed w-screen h-screen top-0 left-0 z-40 bg-slate-900/50 transition-all"
+      style={{
+        pointerEvents: Open ? "all" : "none",
+        opacity: Open ? 1 : 0,
+
+      }}
+
+      onClick={handleClick}
+
+    />
     <div className="flex md:hidden fixed transition-all h-14 z-50"
       style={{
         transform: Open? "translateX(0)" : "translateX(-82%)",
       }}
     >
-      <div className="bg-gray-100/80 px-8 backdrop-blur-sm h-screen font-body">
+
+
+      <div className="bg-gray-100 px-8 h-screen font-body">
         <div className="my-3">
-          <img src="/assets/CampusCircle.svg" />
+          <img className="w-10" src="/assets/CampusCircle.svg" />
         </div>
         {TopNav.map((item, index) => {
           return (
@@ -107,8 +121,9 @@ function Navbar({ Close, setClose }) {
       </div>
 
       
-
+          
     </div>
+    </>
   );
 }
 
