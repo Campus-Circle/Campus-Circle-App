@@ -44,7 +44,9 @@ export default function Home({college,URL}) {
     } ,config).then(res => {   
         dispatch(setAuth(true));
     }).catch(err => {
-        console.log(err.response.data)    
+        if(err.response != undefined){
+          console.log(err.response.data)
+        }    
     })
   }, [auth])
 

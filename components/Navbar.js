@@ -46,7 +46,7 @@ function Navbar({Close,setClose}) {
     },
     {
       id: 6,
-      name: "Feed",
+      name: "Q/A",
       src: "/assets/Navbar/Annotation.svg",
       link: '/feed/hot'
     },

@@ -10,6 +10,7 @@ import Post from "../../components/Postcard";
 
 import Link from "next/link";
 import List from "../../components/Feed/List";
+import { useRouter } from 'next/router'
 
 
 import Loading from "../../components/Loading";
@@ -18,6 +19,7 @@ function Feed({ URL }) {
   const state = useSelector((state) => state.auth);
   const [postFeed, setFeed] = useState([]);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     if(state.isAuth == true)
@@ -58,7 +60,7 @@ function Feed({ URL }) {
   return (
     <div className="md:ml-20 mt-8 w-full font-body">
       <h1 className="text-4xl drop-shadow text-primary tracking-tight font-semibold text-center md:text-left">
-        Feed
+        Q/A
       </h1>
 
       <List />
@@ -66,7 +68,7 @@ function Feed({ URL }) {
       {postFeed === [] ? <Loading /> : null}
 
       {postFeed.map((item, index) => {
-        return <Post item={item} index={index} URL={URL}/>;
+        return <Post item={item} index={index} URL={URL} history={router}/>;
       })}
     </div>
   );
