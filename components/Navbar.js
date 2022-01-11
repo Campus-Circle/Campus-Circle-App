@@ -66,7 +66,7 @@ function Navbar({Close,setClose}) {
     },
     {
       name: "Instagram",
-      link:"https://www.instagram.com/jmicampuscircle/",
+      link:"https://www.instagram.com/cc_campuscircle/",
       src: "/assets/Socials/Instagram.svg",
     },
   ];
