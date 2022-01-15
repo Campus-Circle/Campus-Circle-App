@@ -154,12 +154,12 @@ function Navbar({Close,setClose}) {
         window.location.href = '/';
       }}>
           <BiDoorOpen className="self-center" />
-          Logout
+          <span className="pl-1">{Close ? "" : "Logout"}</span>
       </button> : 
       <Link href="/auth/login">
         <button className="flex font-body font-semibold px-4 py-2 bg-primary/70 ml-6 rounded-lg text-white hover:bg-primary transition-all">
           <BiLogIn className="self-center" />
-          Login
+          <span className="pl-1">{Close? "" : "Login"}</span>
         </button>
       </Link>
       }
