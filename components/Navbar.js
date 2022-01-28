@@ -109,9 +109,11 @@ function Navbar({Close,setClose}) {
           return (
             <Link key={item.id} href={item.link}>
             <li 
-            className="flex p-2 m-4 my-1 font-body text-primary rounded-md cursor-pointer hover:bg-white hover:bg-opacity-40 border-2 border-transparent transition-all"
+            className="flex p-2 m-4 my-1 font-body text-primary rounded-md cursor-pointer hover:bg-white hover:bg-opacity-40 border-2 border-transparent transition-all shadow-md shadow-primary/20"
             style={{
               backgroundColor: (router.pathname == item.link) ? 'white' : null,
+              boxShadow: (router.pathname == item.link) ? null : 'none',
+              justifyContent: Close ? "center" : null
             }}
             >
               <img className="w-4" src={item.src} />
