@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { MdDoubleArrow } from "react-icons/md";
 
-import {useSelector} from "react-redux"
+import { useSelector } from "react-redux";
 
 function Navbar({ Close, setClose }) {
   const router = useRouter();
@@ -15,7 +15,7 @@ function Navbar({ Close, setClose }) {
     setOpen(!Open);
   };
 
-  const auth = useSelector(state => state.auth);
+  const auth = useSelector((state) => state.auth);
 
   const TopNav = [
     {
@@ -64,65 +64,60 @@ function Navbar({ Close, setClose }) {
 
   return (
     <>
-    <div 
-      className="fixed w-screen h-screen top-0 left-0 z-40 bg-slate-900/50 transition-all"
-      style={{
-        pointerEvents: Open ? "all" : "none",
-        opacity: Open ? 1 : 0,
+      <div
+        className="fixed w-screen h-screen top-0 left-0 z-40 bg-slate-900/50 transition-all"
+        style={{
+          pointerEvents: Open ? "all" : "none",
+          opacity: Open ? 1 : 0,
+        }}
+        onClick={handleClick}
+      />
+      <div
+        className="flex md:hidden fixed transition-all h-14 z-50"
+        style={{
+          transform: Open ? "translateX(0)" : "translateX(-82%)",
+        }}
+      >
+        <div className="bg-gray-100 px-8 h-screen font-body">
+          <div className="my-3">
+            <img className="w-10" src="/assets/CampusCircle.svg" />
+          </div>
+          {TopNav.map((item, index) => {
+            return (
+              <Link key={item.name} href={item.link}>
+                <a onClick={handleClick}>
+                  <div
+                    className="flex my-3 py-3 border-b px-3 border-primary/20 rounded-md"
+                    style={{
+                      backgroundColor:
+                        router.pathname == item.link
+                          ? "rgb(152 194 217 / 20%)"
+                          : null,
+                    }}
+                  >
+                    <img className="w-7" src={item.src} />
+                    <p className="mx-3 text-primary font-semibold self-center">
+                      {item.name}
+                    </p>
+                  </div>
+                </a>
+              </Link>
+            );
+          })}
 
-      }}
-
-      onClick={handleClick}
-
-    />
-    <div className="flex md:hidden fixed transition-all h-14 z-50"
-      style={{
-        transform: Open? "translateX(0)" : "translateX(-82%)",
-      }}
-    >
-
-
-      <div className="bg-gray-100 px-8 h-screen font-body">
-        <div className="my-3">
-          <img className="w-10" src="/assets/CampusCircle.svg" />
+          <div></div>
         </div>
-        {TopNav.map((item, index) => {
-          return (
-            <Link key={item.name} href={item.link}>
-              <a onClick={handleClick}>
-              <div
-                className="flex my-3 py-3 border-b px-3 border-primary/20 rounded-md"
-                style={{
-                  backgroundColor:
-                    router.pathname == item.link ? "rgb(152 194 217 / 20%)" : null,
-                }}
-              >
-                <img className="w-7" src={item.src} />
-                <p className="mx-3 text-primary font-semibold self-center">{item.name}</p>
-              </div>
-              </a>
-            </Link>
-          );
-        })}
 
-        <div>
-
+        <div className="bg-gray-50  shadow-lg shadow-primary/20 rounded-r-full h-14 flex">
+          <MdDoubleArrow
+            className="text-3xl text-primary m-3 transition-all self-center"
+            style={{
+              transform: Open ? "rotate(180deg)" : "rotate(0deg)",
+            }}
+            onClick={handleClick}
+          />
         </div>
       </div>
-
-      <div className="bg-gray-50  shadow-lg shadow-primary/20 rounded-r-full h-14 flex">
-        <MdDoubleArrow
-          className="text-3xl text-primary m-3 transition-all self-center"
-          style={{
-            transform: Open ? "rotate(180deg)" : "rotate(0deg)",
-          }}
-          onClick={handleClick}
-        />
-      </div>
-
-      
-          
-    </div>
     </>
   );
 }
