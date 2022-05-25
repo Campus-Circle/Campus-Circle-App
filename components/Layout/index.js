@@ -2,9 +2,15 @@ import React, { useState } from "react";
 import Head from "next/head";
 import Navbar from "./Navbar";
 import NavbarMobile from "./NavbarMobile";
+import { motion } from "framer-motion";
+import { useMediaQuery } from "react-responsive";
 
 function Layout({ children }) {
   const [Close, setClose] = useState(false);
+
+  const isDesktopOrLaptop = useMediaQuery({
+    query: "(min-width: 1224px)",
+  });
 
   return (
     <div>
@@ -54,19 +60,28 @@ function Layout({ children }) {
         />
       </Head>
       <Navbar Close={Close} setClose={setClose} />
-      <div className="flex flex-col md:flex-row">
-        <div
-          className="w-64 hidden md:block"
-          style={{
-            width: Close ? "6rem" : null,
+      <motion.div
+        exit={{
+          opacity: 0,
+        }}
+        className="flex flex-col md:flex-row"
+      >
+        <motion.div
+          className="w-full"
+          animate={{
+            paddingLeft: isDesktopOrLaptop ? (Close ? "6rem" : "16rem") : "0",
           }}
-        />
+          exit={{
+            opacity: 0,
+          }}
+        >
+          {children}
+        </motion.div>
 
-        <div className="md:hidden flex h-10" />
+        <motion.div className="md:hidden flex h-10" />
 
         <NavbarMobile />
-        {children}
-      </div>
+      </motion.div>
     </div>
   );
 }

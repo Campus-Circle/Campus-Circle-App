@@ -5,7 +5,8 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Loading from "../../components/Loading";
 import { Extractor } from "markdown-tables-to-json";
-import Table from "../../components/table";
+import Table from "../../components/Table";
+import AppLayout from "../../components/Layout/AppLayout";
 function Placement({ id, data, columns, rows }) {
   const router = useRouter();
 
@@ -18,26 +19,30 @@ function Placement({ id, data, columns, rows }) {
   }
 
   return (
-    <div className="w-full md:ml-28 font-body">
-      <div className="font-body pl-5">
-        <h1 className="text-3xl py-5 text-primary border-b">Placements</h1>
-        <p className="text-primary p-2 text-xl ">{id}</p>
-      </div>
+    <AppLayout>
+      <div className="md:ml-28 font-body">
+        <div className="font-body pl-5">
+          <h1 className="text-3xl py-5 text-primary border-b">Placements</h1>
+          <p className="text-primary p-2 text-xl ">{id}</p>
+        </div>
 
-      <Table
-        columns={columns}
-        data={rows}
-        rootClassName={`w-full md:w-11/12 mt-5 rounded-md`}
-        headerCellClassName={`text-white font-normal p-2 bg-primary first:rounded-l-xl last:rounded-r-xl`}
-        dataCellClassName={`text-center p-2 border-b-2`}
-      />
+        <div className="w-full">
+          <Table
+            columns={columns}
+            data={rows}
+            className={`w-full md:w-11/12 mt-5 rounded-md`}
+            headerCellClassName={`text-white font-normal p-2 bg-primary first:rounded-l-xl last:rounded-r-xl`}
+            dataCellClassName={`text-center p-2 border-b-2`}
+          />
+        </div>
 
-      {/* <ReactMarkdown
+        {/* <ReactMarkdown
         className="placement-table"
         remarkPlugins={[remarkGfm]}
         children={data}
       /> */}
-    </div>
+      </div>
+    </AppLayout>
   );
 }
 

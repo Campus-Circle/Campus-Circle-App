@@ -1,17 +1,19 @@
 import React from "react";
 import { useTable, useSortBy } from "react-table";
 import { IoCaretDownOutline } from "react-icons/io5";
-
+import { motion } from "framer-motion";
 function Table({
   columns: userColumns,
   data,
   renderRowSubComponent,
-  rootClassName,
+  className,
   headerCellClassName,
   dataCellClassName,
   rowCellClassName,
   headerRowClassName,
+  headerFontWeight,
 }) {
+  console.log(userColumns);
   const {
     getTableProps,
     getTableBodyProps,
@@ -35,7 +37,7 @@ function Table({
       {/* <pre>
         <code>{JSON.stringify({ expanded: expanded }, null, 2)}</code>
       </pre> */}
-      <table {...getTableProps()} className={`${rootClassName}`}>
+      <table {...getTableProps()} className={`${className}`}>
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr
@@ -44,12 +46,16 @@ function Table({
             >
               {headerGroup.headers.map((column) => (
                 <th
-                  {...column.getHeaderProps(column.getSortByToggleProps())}
+                  {...column.getHeaderProps(column.getSortByToggleProps(), {
+                    style: { minWidth: column.minWidth, width: column.width },
+                  })}
                   className={`${headerCellClassName}`}
+                  style={{
+                    fontWeight: headerFontWeight,
+                  }}
                 >
-                  <span className={`flex justify-center items-center`}>
-                    {column.render("Header")}
-
+                  <div className={`flex items-center`}>
+                    <div>{column.render("Header")}</div>
                     <IoCaretDownOutline
                       className={`mx-2
                         ${
@@ -68,7 +74,7 @@ function Table({
                         transition-all
                     `}
                     />
-                  </span>
+                  </div>
                 </th>
               ))}
             </tr>
@@ -83,12 +89,17 @@ function Table({
                 <tr className={`${rowCellClassName}`}>
                   {row.cells.map((cell) => {
                     return (
-                      <td
-                        {...cell.getCellProps()}
+                      <motion.td
+                        {...cell.getCellProps({
+                          style: {
+                            minWidth: cell.column.minWidth,
+                            width: cell.column.width,
+                          },
+                        })}
                         className={`${dataCellClassName}`}
                       >
                         {cell.render("Cell")}
-                      </td>
+                      </motion.td>
                     );
                   })}
                 </tr>
