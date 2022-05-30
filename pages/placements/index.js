@@ -35,7 +35,7 @@ function Index({ data, reports, college }) {
         <div className="w-full flex flex-col">
           <p className="py-3 mt-5 text-lg">Placement Reports</p>
           <div className="w-3/4 flex flex-col gap-5">
-            {data
+            {reports
               .sort((a, b) => a.name < b.name)
               .map((item) => (
                 <Link href={item.link}>
