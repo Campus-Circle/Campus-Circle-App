@@ -50,6 +50,12 @@ function Placement({ id, data, columns, rows, markdown }) {
           <p className="text-primary p-2 text-xl ">{id}</p>
         </div>
 
+        <ReactMarkdown
+          className="placement-content"
+          remarkPlugins={[remarkGfm]}
+          children={markdown}
+        />
+
         <div className="w-full pt-10">
           <div className="flex">
             <input
@@ -70,11 +76,6 @@ function Placement({ id, data, columns, rows, markdown }) {
             dataCellClassName={`text-center p-2 border-b-2`}
           />
         </div>
-        <ReactMarkdown
-          className="placement-content"
-          remarkPlugins={[remarkGfm]}
-          children={markdown}
-        />
       </div>
     </AppLayout>
   );
