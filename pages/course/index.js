@@ -162,7 +162,7 @@ function index({ data, college }) {
                 style={{
                   width: size.width,
                 }}
-                className="flex  items-center overflow-auto md:justify-center"
+                className="flex flex-col items-center overflow-auto md:justify-center"
               >
                 <Table
                   data={TableData.data}

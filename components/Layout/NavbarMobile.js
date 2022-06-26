@@ -37,28 +37,10 @@ function Navbar({ Close, setClose }) {
       link: "/placements",
     },
     {
-      id: 4,
-      name: "Events",
-      src: "/assets/Navbar/Events.svg",
-      link: "/events",
-    },
-    {
       id: 5,
       name: "Notes",
       src: "/assets/Navbar/Notes.svg",
       link: "/notes",
-    },
-    {
-      id: 6,
-      name: "Q/A",
-      src: "/assets/Navbar/Annotation.svg",
-      link: "/feed/hot",
-    },
-    {
-      id: 7,
-      name: "Students List",
-      src: "/assets/Navbar/ClipboardList.svg",
-      link: "/student",
     },
   ];
 

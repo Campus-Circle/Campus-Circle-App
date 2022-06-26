@@ -70,6 +70,7 @@ function Layout({ children }) {
           className="w-full"
           animate={{
             paddingLeft: isDesktopOrLaptop ? (Close ? "6rem" : "16rem") : "0",
+            marginTop: isDesktopOrLaptop ? "0" : 50,
           }}
           exit={{
             opacity: 0,
@@ -79,7 +80,6 @@ function Layout({ children }) {
         </motion.div>
 
         <motion.div className="md:hidden flex h-10" />
-
         <NavbarMobile />
       </motion.div>
     </div>

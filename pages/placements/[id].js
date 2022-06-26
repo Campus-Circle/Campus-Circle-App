@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import Loading from "../../components/Loading";
@@ -8,6 +8,9 @@ import { Extractor } from "markdown-tables-to-json";
 import Table from "../../components/Table";
 import AppLayout from "../../components/Layout/AppLayout";
 import { useDebounce } from "use-debounce";
+import useComponentSize from "@rehooks/component-size";
+import { motion } from "framer-motion";
+
 function Placement({ id, data, columns, rows, markdown }) {
   const router = useRouter();
   const [Row, setRow] = useState(rows);
@@ -42,9 +45,12 @@ function Placement({ id, data, columns, rows, markdown }) {
     setRow(filtered);
   }, [value]);
 
+  const ref = useRef(null);
+  const size = useComponentSize(ref);
+
   return (
     <AppLayout>
-      <div className="md:ml-7 font-body">
+      <div className="md:ml-7 font-body" ref={ref}>
         <div className="font-body pl-5">
           <h1 className="text-3xl py-5 text-primary border-b">Placements</h1>
           <p className="text-primary p-2 text-xl ">{id}</p>
@@ -59,7 +65,7 @@ function Placement({ id, data, columns, rows, markdown }) {
         <div className="w-full pt-10">
           <div className="flex">
             <input
-              className="w-3/4 p-1 px-2 border-2 border-gray-200 rounded-lg focus:border-primary transition-all duration-500 outline-none"
+              className="w-full md:w-3/4 p-1 px-2 border-2 border-gray-200 rounded-lg focus:border-primary transition-all duration-500 outline-none"
               placeholder="Enter Search Value"
               value={Search}
               onChange={(e) => setSearch(e.target.value)}
@@ -68,13 +74,20 @@ function Placement({ id, data, columns, rows, markdown }) {
               {Search === value ? "" : "Searching"}
             </span>
           </div>
-          <Table
-            columns={columns}
-            data={Row ? Row : []}
-            className={`w-full md:w-11/12 mt-5 rounded-md`}
-            headerCellClassName={`text-white font-normal p-2 bg-primary first:rounded-l-xl last:rounded-r-xl`}
-            dataCellClassName={`text-center p-2 border-b-2`}
-          />
+          <motion.div
+            style={{
+              width: size.width - 20,
+            }}
+            className="ml-2 md:ml-0 flex flex-col justify-center items-start overflow-auto"
+          >
+            <Table
+              columns={columns}
+              data={Row ? Row : []}
+              className={`w-full md:w-11/12 mt-5 rounded-sm md:rounded-md`}
+              headerCellClassName={`text-white font-normal p-2 bg-primary first:rounded-l-xl last:rounded-r-xl`}
+              dataCellClassName={`text-center p-2 border-b-2`}
+            />
+          </motion.div>
         </div>
       </div>
     </AppLayout>

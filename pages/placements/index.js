@@ -23,7 +23,7 @@ function Index({ data, reports, college }) {
             <p className="text-lg py-3">
               See Placement Statistics for the year
             </p>
-            <div className="w-3/4 flex flex-col gap-5">
+            <div className="md:w-3/4 flex flex-col gap-5">
               {data
                 .sort((a, b) => a.name < b.name)
                 .map((item) => (
@@ -34,7 +34,7 @@ function Index({ data, reports, college }) {
         </div>
         <div className="w-full flex flex-col">
           <p className="py-3 mt-5 text-lg">Placement Reports</p>
-          <div className="w-3/4 flex flex-col gap-5">
+          <div className="md:w-3/4 flex flex-col gap-5">
             {reports
               .sort((a, b) => a.name < b.name)
               .map((item) => (
