@@ -1,50 +1,36 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-.placement-table {
-  @apply font-body flex;
-  table {
-    @apply flex-grow m-4 rounded-lg;
-    thead {
-      tr {
-        @apply rounded-md bg-primary text-white ;
-        th:nth-child(1){
-            @apply rounded-l-md;
-        }
-
-        th:last-child{
-            @apply rounded-r-md;
-        }
-
-        th {
-          @apply px-3 py-2 font-medium;
-        }
-      }
-    }
-
-    tbody{
-
-        tr{
-            
-            td{
-                @apply p-2 text-center border-b;
-            }
-        }
-    }
-  }
+.Dropdown-control {
+  border-radius: 5px !important;
+  border: none !important;
+  background-color: #f5f5f5 !important;
 }
 
-.Dropdown-control{
-  border-radius: 5px!important;
-  border: none!important;
-  background-color: #f5f5f5!important;
-}
-
-.Dropdown-menu{
-  border: none!important;
+.Dropdown-menu {
+  border: none !important;
   border-radius: 5px;
-  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
 }
 
 .ReactModal__Overlay {
-  background-color: rgba(0, 0, 0, 0.719)!important;
+  background-color: rgba(0, 0, 0, 0.719) !important;
+}
+
+.placement-content {
+  @apply p-4;
+  h4,
+  h3 {
+    @apply font-bold;
+    @apply text-xl text-primary my-4;
+  }
+
+  h2,
+  h1 {
+    @apply font-bold;
+    @apply text-2xl text-primary my-2;
+  }
+
+  p {
+    @apply text-gray-600 py-1;
+  }
 }

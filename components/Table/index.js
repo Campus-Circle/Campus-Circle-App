@@ -1,7 +1,9 @@
 import React from "react";
-import { useTable, useSortBy } from "react-table";
+import { useTable, useSortBy, usePagination } from "react-table";
 import { IoCaretDownOutline } from "react-icons/io5";
 import { motion } from "framer-motion";
+import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
+
 function Table({
   columns: userColumns,
   data,
@@ -18,17 +20,30 @@ function Table({
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    rows,
+    page,
     prepareRow,
     visibleColumns,
-    state: { expanded },
+    canPreviousPage,
+    canNextPage,
+    pageOptions,
+    pageCount,
+    gotoPage,
+    nextPage,
+    previousPage,
+    setPageSize,
+
+    state: { expanded, pageIndex, pageSize },
   } = useTable(
     {
       columns: userColumns,
       data,
+      initialState: {
+        expanded: {},
+        pageIndex: 0,
+      },
     },
-    useSortBy
-
+    useSortBy,
+    usePagination
     // for sub components too!
   );
 
@@ -54,7 +69,7 @@ function Table({
                     fontWeight: headerFontWeight,
                   }}
                 >
-                  <div className={`flex items-center`}>
+                  <div className={`flex items-center justify-center`}>
                     <div>{column.render("Header")}</div>
                     <IoCaretDownOutline
                       className={`mx-2
@@ -81,7 +96,7 @@ function Table({
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {rows.map((row, i) => {
+          {page.map((row, i) => {
             prepareRow(row);
             return (
               // Use a React.Fragment here so the table markup is still valid
@@ -110,6 +125,26 @@ function Table({
       </table>
       <br />
       {/* <div>Showing the first 20 results of {rows.length} rows</div> */}
+
+      <div className="inline-flex my-4 bg-gray-100">
+        <button
+          onClick={() => previousPage()}
+          disabled={!canPreviousPage}
+          className="p-2 bg-primary/80 hover:bg-primary text-white transition-all"
+        >
+          <HiChevronLeft />
+        </button>
+        <div className="self-center w-20 text-center ">
+          {pageIndex + 1} of {pageCount}
+        </div>
+        <button
+          onClick={() => nextPage()}
+          disabled={!canNextPage}
+          className="p-2 bg-primary/80 hover:bg-primary text-white transition-all"
+        >
+          <HiChevronRight />
+        </button>
+      </div>
     </>
   );
 }
