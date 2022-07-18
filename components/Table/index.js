@@ -49,9 +49,6 @@ function Table({
 
   return (
     <>
-      {/* <pre>
-        <code>{JSON.stringify({ expanded: expanded }, null, 2)}</code>
-      </pre> */}
       <table {...getTableProps()} className={`${className}`}>
         <thead>
           {headerGroups.map((headerGroup) => (
@@ -123,10 +120,7 @@ function Table({
           })}
         </tbody>
       </table>
-      <br />
-      {/* <div>Showing the first 20 results of {rows.length} rows</div> */}
-
-      <div className="inline-flex my-4 bg-gray-100">
+      <div className="inline-flex my-4 bg-gray-100 justify-center items-center w-full sticky">
         <button
           onClick={() => previousPage()}
           disabled={!canPreviousPage}

@@ -159,15 +159,15 @@ function index({ data, college }) {
                   opacity: 0,
                   y: 20,
                 }}
-                style={{
-                  width: size.width,
-                }}
-                className="flex flex-col items-center overflow-auto md:justify-center"
+                // style={{
+                //   width: size.width,
+                // }}
+                className=" w-screen overflow-scroll"
               >
                 <Table
                   data={TableData.data}
                   columns={TableData.columns}
-                  className="mx-2 p-3 rounded-md my-3 min-w-fit overflow-scroll"
+                  className="mx-2 p-3 rounded-md my-3 w-screen overflow-hidden"
                   headerRowClassName="text-xs  border-y border-primary "
                   headerCellClassName="whitespace-no-wrap text-center p-2 text-primary cursor-pointer  border-primary"
                   rowCellClassName="  p-2 hover:bg-primary/5"
