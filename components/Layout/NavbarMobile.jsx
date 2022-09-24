@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { AiOutlineMenu } from "react-icons/ai";
+import { AiFillAndroid, AiOutlineMenu } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { IoClose } from "react-icons/io5";
 
@@ -102,6 +102,13 @@ function Navbar({ Close, setClose }) {
             </Link>
           );
         })}
+        <a
+          href={`${process.env.NEXT_PUBLIC_URL}/files/CampusCircle.apk`}
+          className="p-4  rounded-md transition-all flex gap-2 w-full"
+        >
+          <AiFillAndroid className="self-center" />
+          <p className="text-sm font-semibold">Android App is Here!</p>
+        </a>
       </motion.div>
       <div className="lg:hidden fixed h-14 font-body bg-gradient-to-br from-primary to-blue-500 w-full flex text-white justify-start shadow-lg">
         <button className="self-center px-4" onClick={handleClick}>

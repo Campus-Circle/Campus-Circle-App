@@ -5,7 +5,7 @@ import Link from "next/link";
 import { BiDoorOpen, BiLogIn } from "react-icons/bi";
 import { motion } from "framer-motion";
 import { useSelector, useDispatch } from "react-redux";
-import { AiFillHome, AiFillBook } from "react-icons/ai";
+import { AiFillHome, AiFillBook, AiFillAndroid } from "react-icons/ai";
 import { FaBook, FaStickyNote, FaRegNewspaper } from "react-icons/fa";
 import { TiArrowSortedUp } from "react-icons/ti";
 import { useMediaQuery } from "react-responsive";
@@ -110,22 +110,16 @@ function Navbar({ Close, setClose }) {
               </Link>
             );
           })}
+
+          <a
+            href={`${process.env.NEXT_PUBLIC_URL}/files/CampusCircle.apk`}
+            className=" m-5 p-4 text-white flex gap-2 border-2 hover:bg-white hover:text-primary border-white rounded-md transition-all"
+          >
+            <AiFillAndroid className="self-center" />
+            <p className="text-sm">Android App is Here!</p>
+          </a>
         </div>
         <div className="flex justify-end px-5 py-2 items-end w-full">
-          {/* <motion.button
-            animate={{
-              rotate: Close ? "-90deg" : "90deg",
-            }}
-            onClick={ChangeClose}
-            className=""
-          >
-            <TiArrowSortedUp
-              className="
-              
-            m-1 p-1 bg-primary text-white
-            w-10 h-10 rounded-sm"
-            />
-          </motion.button> */}
           <motion.button
             animate={{
               rotate: Close ? "-90deg" : "90deg",
