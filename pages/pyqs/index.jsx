@@ -111,7 +111,6 @@ function PYQ({ courses, pyq }) {
 }
 
 export async function getStaticProps(context) {
-  console.log(process.env.URL);
   const { data } = await axios.get(`${process.env.URL}/course/list.json`);
   const { data: pyq } = await axios.get(`${process.env.URL}/pyq/index.json`);
   const college = process.env.COLLEGE;
