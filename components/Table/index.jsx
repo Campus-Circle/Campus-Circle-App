@@ -120,21 +120,29 @@ function Table({
           })}
         </tbody>
       </table>
-      <div className="inline-flex my-4 bg-gray-100 justify-center items-center w-full sticky">
+      <div className="inline-flex my-4 justify-center w-full sticky">
         <button
           onClick={() => previousPage()}
           disabled={!canPreviousPage}
-          className="p-2 bg-primary/80 hover:bg-primary text-white transition-all"
+          className={`p-2 bg-primary/80 hover:bg-primary text-white transition-all
+            ${
+              canPreviousPage
+                ? "cursor-pointer"
+                : "cursor-not-allowed opacity-50"
+            }
+          `}
         >
           <HiChevronLeft />
         </button>
-        <div className="self-center w-20 text-center ">
+        <div className="self-center w-20 h-8 flex justify-center items-center text-center bg-gray-100">
           {pageIndex + 1} of {pageCount}
         </div>
         <button
           onClick={() => nextPage()}
           disabled={!canNextPage}
-          className="p-2 bg-primary/80 hover:bg-primary text-white transition-all"
+          className={`p-2 bg-primary/80 hover:bg-primary text-white transition-all
+            ${canNextPage ? "cursor-pointer" : "cursor-not-allowed opacity-50"}
+          `}
         >
           <HiChevronRight />
         </button>

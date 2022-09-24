@@ -2,10 +2,8 @@ import axios from "axios";
 import React from "react";
 import Link from "next/link";
 import Head from "next/head";
-import List from "../../components/List";
 import AppLayout from "../../components/Layout/AppLayout";
-import LinkButton from "../../components/Button/LinkButton";
-
+import LinkButton from "../../components/UI/Button/LinkButton";
 function Index({ data, reports, college }) {
   console.log(reports);
   return (
@@ -38,11 +36,7 @@ function Index({ data, reports, college }) {
             {reports
               .sort((a, b) => a.name < b.name)
               .map((item) => (
-                <Link href={item.link}>
-                  <span className="px-4 py-2 text-primary bg-transparent hover:bg-slate-100 rounded-lg hover:pl-6 cursor-pointer transition-all duration-500">
-                    {item.name}
-                  </span>
-                </Link>
+                <LinkButton item={item} />
               ))}
           </div>
         </div>

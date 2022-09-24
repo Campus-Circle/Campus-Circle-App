@@ -14,7 +14,6 @@ import { motion } from "framer-motion";
 function Placement({ id, data, columns, rows, markdown }) {
   const router = useRouter();
   const [Row, setRow] = useState(rows);
-  console.log(Row);
   const [Search, setSearch] = useState("");
 
   if (router.isFallback) {
@@ -128,6 +127,7 @@ export async function getStaticProps({ params }) {
     {
       Header: "S no.",
       accessor: "id",
+      
     },
     {
       Header: "Company",

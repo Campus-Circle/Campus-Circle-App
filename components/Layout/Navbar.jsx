@@ -6,7 +6,7 @@ import { BiDoorOpen, BiLogIn } from "react-icons/bi";
 import { motion } from "framer-motion";
 import { useSelector, useDispatch } from "react-redux";
 import { AiFillHome, AiFillBook } from "react-icons/ai";
-import { FaBook, FaStickyNote } from "react-icons/fa";
+import { FaBook, FaStickyNote, FaRegNewspaper } from "react-icons/fa";
 import { TiArrowSortedUp } from "react-icons/ti";
 import { useMediaQuery } from "react-responsive";
 function Navbar({ Close, setClose }) {
@@ -45,6 +45,12 @@ function Navbar({ Close, setClose }) {
       icon: FaStickyNote,
       link: "/notes",
     },
+    {
+      id: 5,
+      name: "PYQs",
+      icon: FaRegNewspaper,
+      link: "/pyqs",
+    },
   ];
 
   const Socials = [
@@ -64,12 +70,10 @@ function Navbar({ Close, setClose }) {
     setClose(!Close);
   }
 
-  useEffect(() => {}, []);
-
   return (
     <React.Fragment>
       <motion.div
-        className="font-body h-screen fixed  flex-col pt-10 items-center shadow-2xl rounded-r-md shadow-primary/20 bg-white"
+        className="font-body h-screen fixed  flex-col pt-10 items-center shadow-2xl rounded-r-md shadow-primary/50 dark:shadow-slate-900  dark:bg-slate-700 bg-gradient-to-b from-primary to-blue-500"
         animate={{
           width: Close ? "6rem" : "16rem",
           display: isDesktopOrLaptop ? "flex" : "none",
@@ -87,8 +91,8 @@ function Navbar({ Close, setClose }) {
                   
                 ${
                   router.pathname !== item.link
-                    ? "text-gray-700/80"
-                    : "bg-primary/90 text-white"
+                    ? "text-white"
+                    : "text-primary bg-white dark:bg-primary dark:text-white"
                 }
                      transition-all cursor-pointer
                 ${Close ? "justify-center items-center" : ""}
@@ -108,7 +112,7 @@ function Navbar({ Close, setClose }) {
           })}
         </div>
         <div className="flex justify-end px-5 py-2 items-end w-full">
-          <motion.button
+          {/* <motion.button
             animate={{
               rotate: Close ? "-90deg" : "90deg",
             }}
@@ -119,6 +123,20 @@ function Navbar({ Close, setClose }) {
               className="
               
             m-1 p-1 bg-primary text-white
+            w-10 h-10 rounded-sm"
+            />
+          </motion.button> */}
+          <motion.button
+            animate={{
+              rotate: Close ? "-90deg" : "90deg",
+            }}
+            onClick={ChangeClose}
+            className=""
+          >
+            <TiArrowSortedUp
+              className="
+              
+            m-1 p-1 text-white
             w-10 h-10 rounded-sm"
             />
           </motion.button>

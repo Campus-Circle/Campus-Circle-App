@@ -67,7 +67,7 @@ function Layout({ children }) {
         className="flex flex-col md:flex-row"
       >
         <motion.div
-          className="w-full"
+          className="w-full dark:bg-slate-800"
           animate={{
             paddingLeft: isDesktopOrLaptop ? (Close ? "6rem" : "16rem") : "0",
             marginTop: isDesktopOrLaptop ? "0" : 50,

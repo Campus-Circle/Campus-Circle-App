@@ -6,6 +6,7 @@ import Table from "../../components/Table";
 import { motion, AnimatePresence } from "framer-motion";
 import useComponentSize from "@rehooks/component-size";
 import AppLayout from "../../components/Layout/AppLayout";
+import { CourseGenerator } from "../../utils/LinkGen";
 function index({ data, college }) {
   const CourseOptions = [
     {
@@ -34,7 +35,7 @@ function index({ data, college }) {
       };
     });
 
-  const [Info, setInfo] = useState({
+  const [selectedOption, setselectedOption] = useState({
     course: "",
     year: "",
   });
@@ -53,11 +54,11 @@ function index({ data, college }) {
         if (row.original.Link === true) {
           return (
             <a
-              href={`${process.env.NEXT_PUBLIC_URL}/course/${
-                Info.year < 3 ? "ALL" : Info.course
-              }/${Info.year}/${row.original["Paper Code"]
-                .trim()
-                .replace("-", "")}.pdf`}
+              href={CourseGenerator(
+                selectedOption.year,
+                selectedOption.course,
+                row.original["Paper Code"]
+              )}
               className="text-primary border-b border-transparent hover:border-primary"
               target="_blank"
             >
@@ -97,9 +98,9 @@ function index({ data, college }) {
   ];
 
   useEffect(() => {
-    if (Info.course === "" || Info.year === "") return;
-    let course = Info.course;
-    if (parseInt(Info.year) < 3) {
+    if (selectedOption.course === "" || selectedOption.year === "") return;
+    let course = selectedOption.course;
+    if (parseInt(selectedOption.year) < 3) {
       course = "ALL";
     }
 
@@ -108,13 +109,13 @@ function index({ data, college }) {
     setTableData(() => {
       return {
         data: data[course].filter((item) => {
-          console.log(item.Semester, Info.year);
-          return parseInt(item.Semester) === parseInt(Info.year);
+          console.log(item.Semester, selectedOption.year);
+          return parseInt(item.Semester) === parseInt(selectedOption.year);
         }),
         columns: columns,
       };
     });
-  }, [Info]);
+  }, [selectedOption]);
 
   return (
     <AppLayout>
@@ -134,21 +135,28 @@ function index({ data, college }) {
           <div className="flex gap-5 my-2 md:gap-10 w-full justify-center items-center md:justify-evenly  md:flex-row flex-col">
             <div className="w-80 md:my-4">
               <Select
+                isSearchable={false}
                 options={CourseOptions}
                 placeholder="Select Course"
-                onChange={(e) => setInfo({ ...Info, course: e.value })}
+                onChange={(e) =>
+                  setselectedOption({ ...selectedOption, course: e.value })
+                }
               />
             </div>
             <div className="w-80 md:my-4">
               <Select
+                isSearchable={false}
                 options={YearOptions}
                 placeholder="Select Year"
-                onChange={(e) => setInfo({ ...Info, year: e.value })}
+                onChange={(e) =>
+                  setselectedOption({ ...selectedOption, year: e.value })
+                }
               />
             </div>
           </div>
           <AnimatePresence exitBeforeEnter>
-            {Info.course === "" || Info.year === "" ? null : (
+            {selectedOption.course === "" ||
+            selectedOption.year === "" ? null : (
               <motion.div
                 initial={{
                   opacity: 0,

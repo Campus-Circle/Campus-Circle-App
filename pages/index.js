@@ -65,7 +65,7 @@ export default function Home({ college, URL }) {
         </Head>
         <div className="flex" id="welcometocampuscircle">
           <div className="md:w-2/3 flex-grow">
-            <h1 className="text-3xl mt-6 md:text-3xl font-extralight tracking-tight">
+            <h1 className="text-3xl mt-6 md:text-3xl font-extralight tracking-tight dark:text-white">
               Welcome to Campus Circle
             </h1>
             <h3 className="text-white text-sm bg-primary inline-block p-1 rounded-full font-normal px-5 my-2">
@@ -82,7 +82,7 @@ export default function Home({ college, URL }) {
               {TopNav.map((item, index) => {
                 return (
                   <Link key={item.id} href={item.link}>
-                    <li className="text-lg md:text-md text-primary font-light md:my-1 hover:pl-2 transition-all cursor-pointer">
+                    <li className="text-lg md:text-md text-primary dark:text-white font-light md:my-1 hover:pl-2 transition-all cursor-pointer">
                       {item.name}
                     </li>
                   </Link>
@@ -92,7 +92,7 @@ export default function Home({ college, URL }) {
           </div>
           <div className="hidden lg:block w-1/3">
             <img
-              className="pt-5 ml-28 w-2/4 "
+              className="pt-5 ml-28 w-2/4 dark:bg-white p-3 rounded-md"
               src="/assets/Home/HomeIcon.svg"
             />
           </div>
