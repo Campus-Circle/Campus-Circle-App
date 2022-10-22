@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import Select from 'react-select';
 import PropTypes from 'prop-types';
 
@@ -64,8 +64,7 @@ function CourseSelector({ Options, setOptions, onApply, isButtonDisabled }) {
         disabled={isSubmitDisabled}
         style={{
           display: isButtonDisabled ? 'none' : 'block'
-        }}
-      >
+        }}>
         Apply
       </button>
     </React.Fragment>

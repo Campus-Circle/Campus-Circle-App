@@ -62,13 +62,12 @@ function Navbar({ Close, setClose }) {
         animate={{
           width: Close ? '6rem' : '16rem',
           display: isDesktopOrLaptop ? 'flex' : 'none'
-        }}
-      >
+        }}>
         <div className="flex flex-col justify-center items-center">
           <img src={'assets/CampusCircle.svg'} className="w-14" />
         </div>
         <div className="flex-grow flex flex-col items-end gap-3 w-full my-4">
-          {TopNav.map((item, index) => {
+          {TopNav.map((item) => {
             return (
               <Link key={item.id} href={item.link}>
                 <motion.div
@@ -82,14 +81,12 @@ function Navbar({ Close, setClose }) {
                   transition-all cursor-pointer
                   ${Close ? 'justify-center items-center' : ''}
                   
-                `}
-                >
+                `}>
                   <item.icon className="w-6 h-6 " />
                   <span
                     style={{
                       display: Close ? 'none' : 'block'
-                    }}
-                  >
+                    }}>
                     {item.name}
                   </span>
                 </motion.div>
@@ -99,8 +96,7 @@ function Navbar({ Close, setClose }) {
 
           <a
             href={`${process.env.NEXT_PUBLIC_URL}/files/CampusCircle.apk`}
-            className=" m-5 p-4 text-white flex gap-2 border-2 hover:bg-white hover:text-primary border-white rounded-md transition-all"
-          >
+            className=" m-5 p-4 text-white flex gap-2 border-2 hover:bg-white hover:text-primary border-white rounded-md transition-all">
             <AiFillAndroid className="self-center" />
             <div>
               <p className="text-sm">Android App is Here!</p>
@@ -114,8 +110,7 @@ function Navbar({ Close, setClose }) {
               rotate: Close ? '-90deg' : '90deg'
             }}
             onClick={ChangeClose}
-            className=""
-          >
+            className="">
             <TiArrowSortedUp
               className="
               

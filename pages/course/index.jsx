@@ -4,7 +4,6 @@ import Head from 'next/head';
 import Select from 'react-select';
 import Table from '../../components/Table';
 import { motion, AnimatePresence } from 'framer-motion';
-import useComponentSize from '@rehooks/component-size';
 import AppLayout from '../../components/Layout/AppLayout';
 import { CourseGenerator } from '../../utils/LinkGen';
 function index({ data, college }) {
@@ -24,7 +23,6 @@ function index({ data, college }) {
   ];
 
   const ref = React.useRef(null);
-  const size = useComponentSize(ref);
 
   const YearOptions = Array(8)
     .fill(0)
@@ -61,7 +59,7 @@ function index({ data, college }) {
               )}
               className="text-primary border-b border-transparent hover:border-primary"
               target="_blank"
-            >
+              rel="noreferrer">
               {row.original['Paper Code']}
             </a>
           );
@@ -127,8 +125,7 @@ function index({ data, college }) {
         </Head>
         <div
           className="md:ml-10 font-body justify-center items-center flex flex-col mt-10"
-          ref={ref}
-        >
+          ref={ref}>
           <h1 className="text-xl">
             Courses In <span className="text-primary">{college}</span>
           </h1>
@@ -165,8 +162,7 @@ function index({ data, college }) {
                 // style={{
                 //   width: size.width,
                 // }}
-                className=" w-screen md:w-auto overflow-auto"
-              >
+                className=" w-screen md:w-auto overflow-auto">
                 <Table
                   data={TableData.data}
                   columns={TableData.columns}
@@ -186,7 +182,7 @@ function index({ data, college }) {
   );
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
   console.log(process.env.URL);
   const { data } = await axios.get(`${process.env.URL}/course/list.json`);
   const college = process.env.COLLEGE;

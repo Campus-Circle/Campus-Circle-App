@@ -8,8 +8,7 @@ function PrimaryButton({ children, onClick = () => {}, className }) {
            hover:shadow-xl hover:-translate-y-2 transition-all focus:outline-black ${className}`}
       onClick={() => {
         onClick();
-      }}
-    >
+      }}>
       {children}
     </button>
   );

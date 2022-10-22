@@ -10,9 +10,9 @@ function Course({ course, syllabus }) {
       </div>
 
       <ul className="md:ml-14 md:w-1/2 mt-8 font-body text-2xl font-light">
-        {syllabus.map((item, index) => {
+        {syllabus.map((item) => {
           return (
-            <a key={item.title} href={item.link} target="_blank">
+            <a key={item.title} href={item.link} target="_blank" rel="noreferrer">
               <li className="my-2 py-2 px-3 hover:bg-gray-200 rounded-md hover:pl-7 transition-all cursor-pointer hover:shadow-sm">
                 {item.title}
               </li>

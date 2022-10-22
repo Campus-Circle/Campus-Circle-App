@@ -43,7 +43,7 @@ function index({ data }) {
   );
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
   const { data } = await axios.get(`${process.env.URL}/notes/index.json`);
 
   return {

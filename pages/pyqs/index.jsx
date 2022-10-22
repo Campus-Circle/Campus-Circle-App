@@ -33,13 +33,6 @@ function PYQ({ courses, pyq }) {
 
     console.log(FilteredCourses);
 
-    const FilteredPYQ = pyq.filter((item) => {
-      return (
-        item.course === selectedOption.course?.value &&
-        item.semester === selectedOption.semester?.value
-      );
-    });
-
     setResult({
       courses: FilteredCourses
     });
@@ -61,8 +54,8 @@ function PYQ({ courses, pyq }) {
         </div>
         <div className="flex justify-center items-center">
           <div className="flex flex-col gap-2 w-11/12 py-4">
-            {Result.courses.map((item) => (
-              <div className="card ">
+            {Result.courses.map((item, index) => (
+              <div className="card " key={index}>
                 <div className="card-title">{item['Paper Name']}</div>
                 <div className="card-body">
                   <div className="flex text-sm  opacity-40">{item['Paper Code']}</div>
@@ -73,21 +66,20 @@ function PYQ({ courses, pyq }) {
                         selectedOption?.semester?.value,
                         item['Paper Code']
                       )}
-                      className="flex text-primary underline underline-offset-4"
-                    >
+                      className="flex text-primary underline underline-offset-4">
                       <GoLinkExternal className="pr-1 self-center" /> Course Structure
                     </a>
 
                     <div className="flex flex-col gap-2 pt-2">
-                      {item.pyq.map((pyq) => (
+                      {item.pyq.map((pyq, index) => (
                         <a
+                          key={index}
                           href={PYQGenerator(
                             selectedOption?.course?.value,
                             selectedOption?.semester?.value,
                             pyq.fileName
                           )}
-                          className="flex text-primary underline underline-offset-4"
-                        >
+                          className="flex text-primary underline underline-offset-4">
                           <GoLinkExternal className="pr-1 self-center" />
                           {pyq.title}
                         </a>
@@ -104,7 +96,7 @@ function PYQ({ courses, pyq }) {
   );
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
   const { data } = await axios.get(`${process.env.URL}/course/list.json`);
   const { data: pyq } = await axios.get(`${process.env.URL}/pyq/index.json`);
   const college = process.env.COLLEGE;

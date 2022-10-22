@@ -84,8 +84,7 @@ function Post(props) {
       <button
         className="inline-block w-40 mt-3 py-2 font-semibold text-primary 
       hover:bg-slate-50/50 rounded-lg transition-all shadow-md shadow-transparent hover:shadow-primary/10 hover:-translate-y-1"
-        onClick={() => props.history.push(`/post/${props.item._id}`)}
-      >
+        onClick={() => props.history.push(`/post/${props.item._id}`)}>
         SEE ANSWERS
       </button>
     </div>

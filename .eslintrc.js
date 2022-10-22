@@ -13,6 +13,17 @@ module.exports = {
   plugins: ['react'],
   rules: {
     'react/react-in-jsx-scope': 'off',
-    'react/prop-types': 'off'
-  }
+    'react/prop-types': 'off',
+    'react/no-unescaped-entities': 'off',
+    '@next/next/no-page-custom-font': 'off'
+  },
+  ignorePatterns: [
+    'node_modules/',
+    'out/',
+    'next.config.js',
+    'next-env.d.ts',
+    'public/',
+    'utils/',
+    '.next/'
+  ]
 };

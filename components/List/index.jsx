@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 import PropTypes from 'prop-types';
 import LinkButton from '../UI/Button/LinkButton';
 
@@ -20,8 +19,8 @@ function List(props) {
         {props.data.length} {props.type}(s) Found
       </div>
 
-      {props.data.map((item) => (
-        <LinkButton item={item} />
+      {props.data.map((item, index) => (
+        <LinkButton item={item} key={index} />
       ))}
     </React.Fragment>
   );

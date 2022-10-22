@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React from 'react';
-import Link from 'next/link';
 import Head from 'next/head';
 import AppLayout from '../../components/Layout/AppLayout';
 import LinkButton from '../../components/UI/Button/LinkButton';
@@ -22,8 +21,8 @@ function Index({ data, reports, college }) {
             <div className="md:w-3/4 flex flex-col gap-5">
               {data
                 .sort((a, b) => a.name < b.name)
-                .map((item) => (
-                  <LinkButton item={item} />
+                .map((item, index) => (
+                  <LinkButton item={item} key={index} />
                 ))}
             </div>
           </div>
@@ -33,8 +32,8 @@ function Index({ data, reports, college }) {
           <div className="md:w-3/4 flex flex-col gap-5">
             {reports
               .sort((a, b) => a.name < b.name)
-              .map((item) => (
-                <LinkButton item={item} />
+              .map((item, index) => (
+                <LinkButton key={index} item={item} />
               ))}
           </div>
         </div>

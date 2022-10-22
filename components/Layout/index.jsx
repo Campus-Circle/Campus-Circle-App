@@ -57,8 +57,7 @@ function Layout({ children }) {
         exit={{
           opacity: 0
         }}
-        className="flex flex-col md:flex-row"
-      >
+        className="flex flex-col md:flex-row">
         <motion.div
           className="w-full dark:bg-slate-800"
           animate={{
@@ -67,8 +66,7 @@ function Layout({ children }) {
           }}
           exit={{
             opacity: 0
-          }}
-        >
+          }}>
           {children}
         </motion.div>
 

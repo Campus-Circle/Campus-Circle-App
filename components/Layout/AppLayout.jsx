@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 
 const variants = {
@@ -14,8 +14,7 @@ const AppLayout = ({ children }) => (
       animate="enter"
       exit="exit"
       variants={variants}
-      transition={{ type: 'linear' }}
-    >
+      transition={{ type: 'linear' }}>
       {children}
     </motion.main>
   </div>

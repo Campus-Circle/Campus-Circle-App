@@ -7,7 +7,6 @@ import { HiChevronLeft, HiChevronRight } from 'react-icons/hi';
 function Table({
   columns: userColumns,
   data,
-  renderRowSubComponent,
   className,
   headerCellClassName,
   dataCellClassName,
@@ -22,17 +21,13 @@ function Table({
     headerGroups,
     page,
     prepareRow,
-    visibleColumns,
     canPreviousPage,
     canNextPage,
-    pageOptions,
     pageCount,
-    gotoPage,
     nextPage,
     previousPage,
-    setPageSize,
 
-    state: { expanded, pageIndex, pageSize }
+    state: { pageIndex }
   } = useTable(
     {
       columns: userColumns,
@@ -51,18 +46,21 @@ function Table({
     <>
       <table {...getTableProps()} className={`${className}`}>
         <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()} className={`${headerRowClassName}`}>
-              {headerGroup.headers.map((column) => (
+          {headerGroups.map((headerGroup, index) => (
+            <tr
+              key={index}
+              {...headerGroup.getHeaderGroupProps()}
+              className={`${headerRowClassName}`}>
+              {headerGroup.headers.map((column, _index) => (
                 <th
+                  key={_index}
                   {...column.getHeaderProps(column.getSortByToggleProps(), {
                     style: { minWidth: column.minWidth, width: column.width }
                   })}
                   className={`${headerCellClassName}`}
                   style={{
                     fontWeight: headerFontWeight
-                  }}
-                >
+                  }}>
                   <div className={`flex items-center justify-center`}>
                     <div>{column.render('Header')}</div>
                     <IoCaretDownOutline
@@ -90,17 +88,17 @@ function Table({
               // Use a React.Fragment here so the table markup is still valid
               <React.Fragment key={i}>
                 <tr className={`${rowCellClassName}`}>
-                  {row.cells.map((cell) => {
+                  {row.cells.map((cell, index) => {
                     return (
                       <motion.td
+                        key={index}
                         {...cell.getCellProps({
                           style: {
                             minWidth: cell.column.minWidth,
                             width: cell.column.width
                           }
                         })}
-                        className={`${dataCellClassName}`}
-                      >
+                        className={`${dataCellClassName}`}>
                         {cell.render('Cell')}
                       </motion.td>
                     );
@@ -117,8 +115,7 @@ function Table({
           disabled={!canPreviousPage}
           className={`p-2 bg-primary/80 hover:bg-primary text-white transition-all
             ${canPreviousPage ? 'cursor-pointer' : 'cursor-not-allowed opacity-50'}
-          `}
-        >
+          `}>
           <HiChevronLeft />
         </button>
         <div className="self-center w-20 h-8 flex justify-center items-center text-center bg-gray-100">
@@ -129,8 +126,7 @@ function Table({
           disabled={!canNextPage}
           className={`p-2 bg-primary/80 hover:bg-primary text-white transition-all
             ${canNextPage ? 'cursor-pointer' : 'cursor-not-allowed opacity-50'}
-          `}
-        >
+          `}>
           <HiChevronRight />
         </button>
       </div>

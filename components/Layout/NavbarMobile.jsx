@@ -3,10 +3,9 @@ import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { AiFillAndroid, AiOutlineMenu } from 'react-icons/ai';
-import { useSelector } from 'react-redux';
 import { IoClose } from 'react-icons/io5';
 
-function Navbar({ Close, setClose }) {
+function Navbar() {
   const router = useRouter();
 
   const [Open, setOpen] = useState(false);
@@ -14,9 +13,6 @@ function Navbar({ Close, setClose }) {
   const handleClick = () => {
     setOpen(!Open);
   };
-
-  const auth = useSelector((state) => state.auth);
-
   const TopNav = [
     {
       id: 1,
@@ -73,8 +69,7 @@ function Navbar({ Close, setClose }) {
         transition={{
           type: 'tween',
           duration: 0.3
-        }}
-      >
+        }}>
         <div className="flex justify-between">
           <div className="my-3">
             <img className="w-10" src="/assets/CampusCircle.svg" />
@@ -83,7 +78,7 @@ function Navbar({ Close, setClose }) {
             <IoClose size={32} />
           </button>
         </div>
-        {TopNav.map((item, index) => {
+        {TopNav.map((item) => {
           return (
             <Link key={item.name} href={item.link}>
               <a onClick={handleClick}>
@@ -93,8 +88,7 @@ function Navbar({ Close, setClose }) {
                       router.pathname == item.link &&
                       'bg-gradient-to-br from-primary to-blue-500 text-white shadow-lg shadow-primary/20'
                     }
-                  `}
-                >
+                  `}>
                   <img className="w-7 bg-white p-1 rounded-md" src={item.src} />
                   <p className="mx-3 font-semibold self-center">{item.name}</p>
                 </div>
@@ -104,8 +98,7 @@ function Navbar({ Close, setClose }) {
         })}
         <a
           href={`${process.env.NEXT_PUBLIC_URL}/files/CampusCircle.apk`}
-          className="p-4  rounded-md transition-all flex gap-2 w-full"
-        >
+          className="p-4  rounded-md transition-all flex gap-2 w-full">
           <AiFillAndroid className="self-center" />
           <p className="text-sm font-semibold">Android App is Here!</p>
         </a>

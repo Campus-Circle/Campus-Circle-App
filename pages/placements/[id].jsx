@@ -11,7 +11,7 @@ import { useDebounce } from 'use-debounce';
 import useComponentSize from '@rehooks/component-size';
 import { motion } from 'framer-motion';
 
-function Placement({ id, data, columns, rows, markdown }) {
+function Placement({ id, columns, rows, markdown }) {
   const router = useRouter();
   const [Row, setRow] = useState(rows);
   const [Search, setSearch] = useState('');
@@ -24,7 +24,7 @@ function Placement({ id, data, columns, rows, markdown }) {
     );
   }
 
-  function filter(array, value, key) {
+  function filter(array, value) {
     return array.filter((item) =>
       Object.keys(item).some((k) =>
         item[k].toString().toLowerCase().includes(value.toString().toLowerCase())
@@ -55,6 +55,7 @@ function Placement({ id, data, columns, rows, markdown }) {
         <ReactMarkdown
           className="placement-content"
           remarkPlugins={[remarkGfm]}
+          // eslint-disable-next-line react/no-children-prop
           children={markdown}
         />
 
@@ -74,8 +75,7 @@ function Placement({ id, data, columns, rows, markdown }) {
             style={{
               width: size.width - 20
             }}
-            className="ml-2 md:ml-0 flex flex-col justify-center items-start overflow-auto"
-          >
+            className="ml-2 md:ml-0 flex flex-col justify-center items-start overflow-auto">
             <Table
               columns={columns}
               data={Row ? Row : []}
