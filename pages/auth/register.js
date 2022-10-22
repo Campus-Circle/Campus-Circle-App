@@ -1,21 +1,21 @@
-import React, { useState } from "react";
-import Dropdown from "react-dropdown";
-import "react-dropdown/style.css";
-import { Formik, Field, Form } from "formik";
-import axios from "axios";
+import React, { useState } from 'react';
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
+import { Formik, Field, Form } from 'formik';
+import axios from 'axios';
 
-import { useSelector, useDispatch } from "react-redux";
-import { setToken, setUser } from "../../redux/counter/auth";
+import { useSelector, useDispatch } from 'react-redux';
+import { setToken, setUser } from '../../redux/counter/auth';
 
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import {FcOk} from 'react-icons/fc'
-import { useRouter } from "next/router";
-import Modal from "react-modal";
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
+import { FcOk } from 'react-icons/fc';
+import { useRouter } from 'next/router';
+import Modal from 'react-modal';
 
-import Link from "next/link";
+import Link from 'next/link';
 
 function Login({ URL }) {
   const router = useRouter();
@@ -29,33 +29,30 @@ function Login({ URL }) {
 
   const HandleClick = () => {
     setModalOpen(!ModalOpen);
-  }
+  };
 
   return (
     <div className="w-full font-body md:pl-16 flex flex-col h-full">
-      <img
-        className="fixed scale-110 -z-50 w-screen h-screen top-0 left-0"
-        src="/assets/bg.svg"
-      />
+      <img className="fixed scale-110 -z-50 w-screen h-screen top-0 left-0" src="/assets/bg.svg" />
       <Formik
         initialValues={{
-          email: "",
-          password: "",
-          confirmpassword: "",
-          name: "",
-          email: "",
-          branch: "CSE",
-          year: "2020",
+          email: '',
+          password: '',
+          confirmpassword: '',
+          name: '',
+          email: '',
+          branch: 'CSE',
+          year: '2020'
         }}
         validate={(values) => {
           const errors = {};
 
           if (
-            values.email === "" ||
-            values.password == "" ||
-            values.branch === "" ||
-            values.year === "" ||
-            values.name === "" ||
+            values.email === '' ||
+            values.password == '' ||
+            values.branch === '' ||
+            values.year === '' ||
+            values.name === '' ||
             values.confirmpassword !== values.password
           ) {
             setSignIn(false);
@@ -66,11 +63,11 @@ function Login({ URL }) {
         onSubmit={async (values) => {
           setSignIn(true);
           if (values.password !== values.confirmpassword) {
-            alert("Passwords do not match");
+            alert('Passwords do not match');
             setSignIn(false);
             return;
           } else if (values.password.length < 6) {
-            alert("Password must be at least 6 characters");
+            alert('Password must be at least 6 characters');
             setSignIn(false);
             return;
           }
@@ -81,14 +78,14 @@ function Login({ URL }) {
               year: values.year,
               name: values.name,
               email: values.email,
-              password: values.password,
+              password: values.password
             })
             .then((res) => {
-              toast.success("Successfully Registered");
+              toast.success('Successfully Registered');
               HandleClick();
             })
             .catch((err) => {
-              toast.error("Error occured");
+              toast.error('Error occured');
             });
         }}
       >
@@ -150,9 +147,7 @@ function Login({ URL }) {
               />
             </label>
             <label className="flex flex-col my-3 md:mx-5">
-              <span className="text-sm  text-gray-800/50">
-                Confirm Password
-              </span>
+              <span className="text-sm  text-gray-800/50">Confirm Password</span>
               <Field
                 id="confirmpassword"
                 name="confirmpassword"
@@ -167,11 +162,11 @@ function Login({ URL }) {
        transition-all shadow-lg hover:bg-secondary "
             disabled={Disabled}
             style={{
-              opacity: Disabled ? 0.2 : 1,
+              opacity: Disabled ? 0.2 : 1
             }}
           >
             {SignIn == false ? (
-              "Sign In"
+              'Sign In'
             ) : (
               <div className="flex">
                 <AiOutlineLoading3Quarters className="w-6 h-6 mx-2 animate-spin" />
@@ -180,9 +175,7 @@ function Login({ URL }) {
             )}
           </button>
           <div className="mt-5">
-            <span className="text-sm text-gray-800/50">
-              Already have an account?
-            </span>
+            <span className="text-sm text-gray-800/50">Already have an account?</span>
             <Link href="/auth/login">
               <span className="text-primary cursor-pointer text-sm ml-2 font-semibold">
                 Sign In
@@ -197,15 +190,12 @@ function Login({ URL }) {
         isOpen={ModalOpen}
       >
         <div className="flex flex-col justify-center items-center h-full">
-
           <div className="flex flex-col justify-center items-center">
-              
-              <FcOk className="h-72 w-auto" />
-              <h1 
-                className="text-2xl w-4/6 text-center font-body text-black/50"
-              >
-                Verification Mail has been sent to your email account. Please check your inbox and verify your account.
-              </h1>
+            <FcOk className="h-72 w-auto" />
+            <h1 className="text-2xl w-4/6 text-center font-body text-black/50">
+              Verification Mail has been sent to your email account. Please check your inbox and
+              verify your account.
+            </h1>
           </div>
 
           <button
@@ -225,8 +215,8 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      URL,
-    },
+      URL
+    }
   };
 }
 export default Login;

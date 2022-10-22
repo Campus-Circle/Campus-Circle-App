@@ -4,7 +4,8 @@ Welcome to campus circle.
 
 College Circle is a platform where students can stay updated of everything around Campus.
 
-Stay Updated to 
+Stay Updated to
+
 - Course
 - Placements
 - Events

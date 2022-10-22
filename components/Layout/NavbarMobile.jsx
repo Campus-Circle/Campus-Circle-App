@@ -1,10 +1,10 @@
-import React, { useMemo, useState } from "react";
-import { useRouter } from "next/router";
-import { motion } from "framer-motion";
-import Link from "next/link";
-import { AiFillAndroid, AiOutlineMenu } from "react-icons/ai";
-import { useSelector } from "react-redux";
-import { IoClose } from "react-icons/io5";
+import React, { useMemo, useState } from 'react';
+import { useRouter } from 'next/router';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { AiFillAndroid, AiOutlineMenu } from 'react-icons/ai';
+import { useSelector } from 'react-redux';
+import { IoClose } from 'react-icons/io5';
 
 function Navbar({ Close, setClose }) {
   const router = useRouter();
@@ -20,34 +20,34 @@ function Navbar({ Close, setClose }) {
   const TopNav = [
     {
       id: 1,
-      name: "Home",
-      src: "/assets/Navbar/Home.svg",
-      link: "/",
+      name: 'Home',
+      src: '/assets/Navbar/Home.svg',
+      link: '/'
     },
     {
       id: 2,
-      name: "Course",
-      src: "/assets/Navbar/Course.svg",
-      link: "/course",
+      name: 'Course',
+      src: '/assets/Navbar/Course.svg',
+      link: '/course'
     },
     {
       id: 3,
-      name: "Placements",
-      src: "/assets/Navbar/Placements.svg",
-      link: "/placements",
+      name: 'Placements',
+      src: '/assets/Navbar/Placements.svg',
+      link: '/placements'
     },
     {
       id: 5,
-      name: "Notes",
-      src: "/assets/Navbar/Notes.svg",
-      link: "/notes",
+      name: 'Notes',
+      src: '/assets/Navbar/Notes.svg',
+      link: '/notes'
     },
     {
       id: 6,
-      name: "PYQs",
-      src: "/assets/Navbar/PYQs.svg",
-      link: "/pyqs",
-    },
+      name: 'PYQs',
+      src: '/assets/Navbar/PYQs.svg',
+      link: '/pyqs'
+    }
   ];
 
   const SelectedNav = useMemo(() => {
@@ -60,19 +60,19 @@ function Navbar({ Close, setClose }) {
       <div
         className="fixed  w-screen h-screen top-0 left-0 z-40 bg-slate-900/50 transition-all"
         style={{
-          pointerEvents: Open ? "all" : "none",
-          opacity: Open ? 1 : 0,
+          pointerEvents: Open ? 'all' : 'none',
+          opacity: Open ? 1 : 0
         }}
         onClick={handleClick}
       />
       <motion.div
         className="bg-white px-8 pt-5 h-screen fixed z-50 w-10/12  font-body"
         animate={{
-          x: Open ? 0 : "-100%",
+          x: Open ? 0 : '-100%'
         }}
         transition={{
-          type: "tween",
-          duration: 0.3,
+          type: 'tween',
+          duration: 0.3
         }}
       >
         <div className="flex justify-between">
@@ -91,7 +91,7 @@ function Navbar({ Close, setClose }) {
                   className={`flex my-3 py-3 border-b px-3 border-primary/20 rounded-md
                     ${
                       router.pathname == item.link &&
-                      "bg-gradient-to-br from-primary to-blue-500 text-white shadow-lg shadow-primary/20"
+                      'bg-gradient-to-br from-primary to-blue-500 text-white shadow-lg shadow-primary/20'
                     }
                   `}
                 >
@@ -114,9 +114,7 @@ function Navbar({ Close, setClose }) {
         <button className="self-center px-4" onClick={handleClick}>
           <AiOutlineMenu size={32} />
         </button>
-        <div className="self-center text-xl font-semibold">
-          {SelectedNav?.name}
-        </div>
+        <div className="self-center text-xl font-semibold">{SelectedNav?.name}</div>
       </div>
     </>
   );

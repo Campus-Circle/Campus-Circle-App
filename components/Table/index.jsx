@@ -1,8 +1,8 @@
-import React from "react";
-import { useTable, useSortBy, usePagination } from "react-table";
-import { IoCaretDownOutline } from "react-icons/io5";
-import { motion } from "framer-motion";
-import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
+import React from 'react';
+import { useTable, useSortBy, usePagination } from 'react-table';
+import { IoCaretDownOutline } from 'react-icons/io5';
+import { motion } from 'framer-motion';
+import { HiChevronLeft, HiChevronRight } from 'react-icons/hi';
 
 function Table({
   columns: userColumns,
@@ -13,7 +13,7 @@ function Table({
   dataCellClassName,
   rowCellClassName,
   headerRowClassName,
-  headerFontWeight,
+  headerFontWeight
 }) {
   console.log(userColumns);
   const {
@@ -32,15 +32,15 @@ function Table({
     previousPage,
     setPageSize,
 
-    state: { expanded, pageIndex, pageSize },
+    state: { expanded, pageIndex, pageSize }
   } = useTable(
     {
       columns: userColumns,
       data,
       initialState: {
         expanded: {},
-        pageIndex: 0,
-      },
+        pageIndex: 0
+      }
     },
     useSortBy,
     usePagination
@@ -52,37 +52,28 @@ function Table({
       <table {...getTableProps()} className={`${className}`}>
         <thead>
           {headerGroups.map((headerGroup) => (
-            <tr
-              {...headerGroup.getHeaderGroupProps()}
-              className={`${headerRowClassName}`}
-            >
+            <tr {...headerGroup.getHeaderGroupProps()} className={`${headerRowClassName}`}>
               {headerGroup.headers.map((column) => (
                 <th
                   {...column.getHeaderProps(column.getSortByToggleProps(), {
-                    style: { minWidth: column.minWidth, width: column.width },
+                    style: { minWidth: column.minWidth, width: column.width }
                   })}
                   className={`${headerCellClassName}`}
                   style={{
-                    fontWeight: headerFontWeight,
+                    fontWeight: headerFontWeight
                   }}
                 >
                   <div className={`flex items-center justify-center`}>
-                    <div>{column.render("Header")}</div>
+                    <div>{column.render('Header')}</div>
                     <IoCaretDownOutline
                       className={`mx-2
                         ${
                           column.isSorted
-                            ? "opacity-100 translate-x-0"
-                            : "rotate-45 -translate-x-6 opacity-0"
+                            ? 'opacity-100 translate-x-0'
+                            : 'rotate-45 -translate-x-6 opacity-0'
                         }
 
-                        ${
-                          column.isSorted
-                            ? column.isSortedDesc
-                              ? ""
-                              : "rotate-180"
-                            : ""
-                        }
+                        ${column.isSorted ? (column.isSortedDesc ? '' : 'rotate-180') : ''}
                         transition-all
                     `}
                     />
@@ -105,12 +96,12 @@ function Table({
                         {...cell.getCellProps({
                           style: {
                             minWidth: cell.column.minWidth,
-                            width: cell.column.width,
-                          },
+                            width: cell.column.width
+                          }
                         })}
                         className={`${dataCellClassName}`}
                       >
-                        {cell.render("Cell")}
+                        {cell.render('Cell')}
                       </motion.td>
                     );
                   })}
@@ -125,11 +116,7 @@ function Table({
           onClick={() => previousPage()}
           disabled={!canPreviousPage}
           className={`p-2 bg-primary/80 hover:bg-primary text-white transition-all
-            ${
-              canPreviousPage
-                ? "cursor-pointer"
-                : "cursor-not-allowed opacity-50"
-            }
+            ${canPreviousPage ? 'cursor-pointer' : 'cursor-not-allowed opacity-50'}
           `}
         >
           <HiChevronLeft />
@@ -141,7 +128,7 @@ function Table({
           onClick={() => nextPage()}
           disabled={!canNextPage}
           className={`p-2 bg-primary/80 hover:bg-primary text-white transition-all
-            ${canNextPage ? "cursor-pointer" : "cursor-not-allowed opacity-50"}
+            ${canNextPage ? 'cursor-pointer' : 'cursor-not-allowed opacity-50'}
           `}
         >
           <HiChevronRight />

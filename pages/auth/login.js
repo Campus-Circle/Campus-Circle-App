@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react";
-import Dropdown from "react-dropdown";
-import "react-dropdown/style.css";
+import React, { useEffect, useState } from 'react';
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
 
-import axios from "axios";
-import { Formik, Field, Form } from "formik";
+import axios from 'axios';
+import { Formik, Field, Form } from 'formik';
 
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-import { useSelector, useDispatch } from "react-redux";
-import { setToken, setUser } from "../../redux/counter/auth";
-import { useRouter } from "next/router";
+import { useSelector, useDispatch } from 'react-redux';
+import { setToken, setUser } from '../../redux/counter/auth';
+import { useRouter } from 'next/router';
 
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
-import Link from "next/link";
+import Link from 'next/link';
 
 function Login({ URL }) {
   const router = useRouter();
@@ -44,19 +44,16 @@ function Login({ URL }) {
 
   return (
     <div className="w-full font-body md:pl-16 flex flex-col h-screen md:h-auto ">
-      <img
-        className="fixed scale-110 -z-50 w-screen h-screen top-0 left-0"
-        src="/assets/bg.svg"
-      />
+      <img className="fixed scale-110 -z-50 w-screen h-screen top-0 left-0" src="/assets/bg.svg" />
       <Formik
         initialValues={{
-          email: "",
-          password: "",
+          email: '',
+          password: ''
         }}
         validate={(values) => {
           const errors = {};
 
-          if (values.email === "" || values.password == "") {
+          if (values.email === '' || values.password == '') {
             setDisabled(true);
           } else {
             setDisabled(false);
@@ -76,15 +73,15 @@ function Login({ URL }) {
               const authstate = {
                 isAuth: true,
                 token: res.data.token,
-                user: res.data.user,
+                user: res.data.user
               };
 
-              localStorage.setItem("CampusAuth", JSON.stringify(authstate));
+              localStorage.setItem('CampusAuth', JSON.stringify(authstate));
 
-              toast.success("Login Successful");
+              toast.success('Login Successful');
               setProcessing(false);
               setTimeout(() => {
-                router.push("/");
+                router.push('/');
               }, 1000);
             })
             .catch((err) => {
@@ -97,10 +94,7 @@ function Login({ URL }) {
           <h2 className="text-3xl pb-12 font-bold text-primary ">Sign In</h2>
           <label className="flex flex-col my-3 md:mr-5">
             <span className="text-sm  text-gray-800/50">Email Address</span>
-            <Field
-              name="email"
-              className="border p-2 rounded-md focus:outline-primary/50"
-            />
+            <Field name="email" className="border p-2 rounded-md focus:outline-primary/50" />
           </label>
 
           <label className="flex flex-col my-3 md:mr-5">
@@ -118,7 +112,7 @@ function Login({ URL }) {
         "
             disabled={Disabled}
             style={{
-              opacity: Disabled ? 0.5 : 1,
+              opacity: Disabled ? 0.5 : 1
             }}
           >
             {Processing ? (
@@ -127,7 +121,7 @@ function Login({ URL }) {
                 <span className="self-center">Processing</span>
               </div>
             ) : (
-              "Sign In"
+              'Sign In'
             )}
           </button>
           <div className="my-2">
@@ -139,9 +133,7 @@ function Login({ URL }) {
             </Link>
           </div>
           <div className="mt-5">
-            <span className="text-sm text-gray-800/50">
-              Don't have an account?
-            </span>
+            <span className="text-sm text-gray-800/50">Don't have an account?</span>
             <Link href="/auth/register">
               <span className="text-primary cursor-pointer text-sm ml-2 font-semibold">
                 Sign Up
@@ -162,7 +154,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      URL,
-    },
+      URL
+    }
   };
 }

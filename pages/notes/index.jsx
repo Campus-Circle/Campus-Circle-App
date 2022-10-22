@@ -1,9 +1,9 @@
-import axios from "axios";
-import React, { useCallback, useState } from "react";
-import AppLayout from "../../components/Layout/AppLayout";
-import List from "../../components/List";
-import CourseSelector from "../../components/Forms/CourseSelector";
-import { toast } from "react-toastify";
+import axios from 'axios';
+import React, { useCallback, useState } from 'react';
+import AppLayout from '../../components/Layout/AppLayout';
+import List from '../../components/List';
+import CourseSelector from '../../components/Forms/CourseSelector';
+import { toast } from 'react-toastify';
 
 function index({ data }) {
   const [Result, setResult] = useState([]);
@@ -18,7 +18,7 @@ function index({ data }) {
       return state;
     });
 
-    toast("Filter Applied");
+    toast('Filter Applied');
     setResult(FilteredData);
   }, [selectedOption]);
 
@@ -48,9 +48,9 @@ export async function getStaticProps(context) {
 
   return {
     props: {
-      data: data,
+      data: data
     },
-    revalidate: 1,
+    revalidate: 1
   };
 }
 

@@ -1,20 +1,20 @@
-import axios from "axios";
-import { useRouter } from "next/router";
-import React, { useEffect, useRef, useState } from "react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import Loading from "../../components/Loading";
-import { Extractor } from "markdown-tables-to-json";
-import Table from "../../components/Table";
-import AppLayout from "../../components/Layout/AppLayout";
-import { useDebounce } from "use-debounce";
-import useComponentSize from "@rehooks/component-size";
-import { motion } from "framer-motion";
+import axios from 'axios';
+import { useRouter } from 'next/router';
+import React, { useEffect, useRef, useState } from 'react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import Loading from '../../components/Loading';
+import { Extractor } from 'markdown-tables-to-json';
+import Table from '../../components/Table';
+import AppLayout from '../../components/Layout/AppLayout';
+import { useDebounce } from 'use-debounce';
+import useComponentSize from '@rehooks/component-size';
+import { motion } from 'framer-motion';
 
 function Placement({ id, data, columns, rows, markdown }) {
   const router = useRouter();
   const [Row, setRow] = useState(rows);
-  const [Search, setSearch] = useState("");
+  const [Search, setSearch] = useState('');
 
   if (router.isFallback) {
     return (
@@ -27,10 +27,7 @@ function Placement({ id, data, columns, rows, markdown }) {
   function filter(array, value, key) {
     return array.filter((item) =>
       Object.keys(item).some((k) =>
-        item[k]
-          .toString()
-          .toLowerCase()
-          .includes(value.toString().toLowerCase())
+        item[k].toString().toLowerCase().includes(value.toString().toLowerCase())
       )
     );
   }
@@ -70,12 +67,12 @@ function Placement({ id, data, columns, rows, markdown }) {
               onChange={(e) => setSearch(e.target.value)}
             />
             <span className="self-center text-xs text-gray-400 px-3">
-              {Search === value ? "" : "Searching"}
+              {Search === value ? '' : 'Searching'}
             </span>
           </div>
           <motion.div
             style={{
-              width: size.width - 20,
+              width: size.width - 20
             }}
             className="ml-2 md:ml-0 flex flex-col justify-center items-start overflow-auto"
           >
@@ -100,48 +97,43 @@ export async function getStaticPaths() {
   console.log(JSON.parse(JSON.stringify(data)));
   const paths = data.placement?.map((item) => ({
     params: {
-      id: item.name,
-    },
+      id: item.name
+    }
   }));
   return {
     paths,
-    fallback: true,
+    fallback: true
   };
 }
 
 export async function getStaticProps({ params }) {
-  const { data } = await axios.get(
-    `${process.env.URL}/placements/${params.id}.md`
-  );
+  const { data } = await axios.get(`${process.env.URL}/placements/${params.id}.md`);
 
-  const regex = new RegExp(
-    /((\r?\n){2}|^)([^\r\n]*\|[^\r\n]*(\r?\n)?)+(?=(\r?\n){2}|$)/g
-  );
+  const regex = new RegExp(/((\r?\n){2}|^)([^\r\n]*\|[^\r\n]*(\r?\n)?)+(?=(\r?\n){2}|$)/g);
 
-  const text = data.replace(regex, "");
+  const text = data.replace(regex, '');
 
-  let table = Extractor.extractAllTables(data, "rows", true);
+  let table = Extractor.extractAllTables(data, 'rows', true);
   table = table[0].slice(1);
 
   const columns = [
     {
-      Header: "S no.",
-      accessor: "id",
-      
+      Header: 'S no.',
+      accessor: 'id'
     },
     {
-      Header: "Company",
-      accessor: "Company",
-      disableSortBy: true,
+      Header: 'Company',
+      accessor: 'Company',
+      disableSortBy: true
     },
     {
-      Header: "CTC(in Lakhs)",
-      accessor: "ctc",
+      Header: 'CTC(in Lakhs)',
+      accessor: 'ctc'
     },
     {
-      Header: "No. of Offers",
-      accessor: "offers",
-    },
+      Header: 'No. of Offers',
+      accessor: 'offers'
+    }
   ];
 
   const rows = table.map((item, index) => {
@@ -149,7 +141,7 @@ export async function getStaticProps({ params }) {
       id: index + 1,
       Company: item[0],
       ctc: item[1],
-      offers: item[2] === undefined ? "" : item[2],
+      offers: item[2] === undefined ? '' : item[2]
     };
   });
 
@@ -159,8 +151,8 @@ export async function getStaticProps({ params }) {
       data: data,
       columns,
       rows,
-      markdown: text,
+      markdown: text
     },
-    revalidate: 1,
+    revalidate: 1
   };
 }

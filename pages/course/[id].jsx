@@ -1,5 +1,5 @@
-import axios from "axios";
-import React from "react";
+import axios from 'axios';
+import React from 'react';
 
 function Course({ course, syllabus }) {
   return (
@@ -31,9 +31,7 @@ export async function getServerSideProps(context) {
 
   let course = data.filter((item) => item.url == id);
 
-  const syllabus = await axios.get(
-    `${process.env.URL}/course/${course[0].link}`
-  );
+  const syllabus = await axios.get(`${process.env.URL}/course/${course[0].link}`);
 
   console.log(course);
   console.log(syllabus.data);
@@ -41,8 +39,8 @@ export async function getServerSideProps(context) {
   return {
     props: {
       course: course[0],
-      syllabus: syllabus.data,
-    },
+      syllabus: syllabus.data
+    }
   };
 }
 

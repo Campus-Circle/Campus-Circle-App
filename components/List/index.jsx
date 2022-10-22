@@ -1,7 +1,7 @@
-import React from "react";
-import Link from "next/link";
-import PropTypes from "prop-types";
-import LinkButton from "../UI/Button/LinkButton";
+import React from 'react';
+import Link from 'next/link';
+import PropTypes from 'prop-types';
+import LinkButton from '../UI/Button/LinkButton';
 
 function List(props) {
   if (props.data.length === 0) {
@@ -29,7 +29,7 @@ function List(props) {
 
 List.propTypes = {
   type: PropTypes.string,
-  data: PropTypes.array,
+  data: PropTypes.array
 };
 
 export default List;

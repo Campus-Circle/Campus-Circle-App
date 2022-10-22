@@ -1,32 +1,31 @@
-import React, { useCallback, useMemo } from "react";
-import Select from "react-select";
-import PropTypes from "prop-types";
+import React, { useCallback, useMemo } from 'react';
+import Select from 'react-select';
+import PropTypes from 'prop-types';
 
 function CourseSelector({ Options, setOptions, onApply, isButtonDisabled }) {
-  const handleChange = (type) => (data) =>
-    setOptions({ ...Options, [type]: data });
+  const handleChange = (type) => (data) => setOptions({ ...Options, [type]: data });
 
   const CourseOptions = [
     {
-      value: "CSE",
-      label: "Computer Science Engineering",
+      value: 'CSE',
+      label: 'Computer Science Engineering'
     },
     {
-      value: "ECE",
-      label: "Electronics and Communication Engineering",
+      value: 'ECE',
+      label: 'Electronics and Communication Engineering'
     },
     {
-      value: "EE",
-      label: "Electrical Engineering",
+      value: 'EE',
+      label: 'Electrical Engineering'
     },
     {
-      value: "ME",
-      label: "Mechanical Engineering",
+      value: 'ME',
+      label: 'Mechanical Engineering'
     },
     {
-      value: "CE",
-      label: "Civil Engineering",
-    },
+      value: 'CE',
+      label: 'Civil Engineering'
+    }
   ];
 
   const SemesterOptions = Array(8)
@@ -34,16 +33,12 @@ function CourseSelector({ Options, setOptions, onApply, isButtonDisabled }) {
     .map((_, index) => {
       return {
         value: index + 1,
-        label: `${index + 1} Semester`,
+        label: `${index + 1} Semester`
       };
     });
 
   const isSubmitDisabled = useMemo(() => {
-    if (
-      Options?.semester?.value != undefined &&
-      Options?.course?.value != undefined
-    )
-      return false;
+    if (Options?.semester?.value != undefined && Options?.course?.value != undefined) return false;
     return true;
   }, [Options]);
 
@@ -54,13 +49,13 @@ function CourseSelector({ Options, setOptions, onApply, isButtonDisabled }) {
         className="flex-1"
         options={CourseOptions}
         isSearchable={false}
-        onChange={handleChange("course")}
+        onChange={handleChange('course')}
       />
       <Select
         placeholder="Select Semester"
         className="flex-1"
         options={SemesterOptions}
-        onChange={handleChange("semester")}
+        onChange={handleChange('semester')}
         isSearchable={false}
       />
       <button
@@ -68,7 +63,7 @@ function CourseSelector({ Options, setOptions, onApply, isButtonDisabled }) {
         onClick={onApply}
         disabled={isSubmitDisabled}
         style={{
-          display: isButtonDisabled ? "none" : "block",
+          display: isButtonDisabled ? 'none' : 'block'
         }}
       >
         Apply
@@ -81,7 +76,7 @@ CourseSelector.propTypes = {
   Options: PropTypes.object,
   setOptions: PropTypes.func,
   onApply: PropTypes.func,
-  isButtonDisabled: PropTypes.bool,
+  isButtonDisabled: PropTypes.bool
 };
 
 export default CourseSelector;

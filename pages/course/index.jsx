@@ -1,26 +1,26 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import Head from "next/head";
-import Select from "react-select";
-import Table from "../../components/Table";
-import { motion, AnimatePresence } from "framer-motion";
-import useComponentSize from "@rehooks/component-size";
-import AppLayout from "../../components/Layout/AppLayout";
-import { CourseGenerator } from "../../utils/LinkGen";
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import Head from 'next/head';
+import Select from 'react-select';
+import Table from '../../components/Table';
+import { motion, AnimatePresence } from 'framer-motion';
+import useComponentSize from '@rehooks/component-size';
+import AppLayout from '../../components/Layout/AppLayout';
+import { CourseGenerator } from '../../utils/LinkGen';
 function index({ data, college }) {
   const CourseOptions = [
     {
-      value: "CSE",
-      label: "Computer Science Engineering",
+      value: 'CSE',
+      label: 'Computer Science Engineering'
     },
     {
-      value: "ECE",
-      label: "Electronics and Communication Engineering",
+      value: 'ECE',
+      label: 'Electronics and Communication Engineering'
     },
     {
-      value: "EE",
-      label: "Electrical Engineering",
-    },
+      value: 'EE',
+      label: 'Electrical Engineering'
+    }
   ];
 
   const ref = React.useRef(null);
@@ -31,24 +31,24 @@ function index({ data, college }) {
     .map((item, index) => {
       return {
         value: index + 1,
-        label: `${index + 1} Semester`,
+        label: `${index + 1} Semester`
       };
     });
 
   const [selectedOption, setselectedOption] = useState({
-    course: "",
-    year: "",
+    course: '',
+    year: ''
   });
 
   const [TableData, setTableData] = useState({
     data: [],
-    columns: [],
+    columns: []
   });
 
   const columns = [
     {
-      Header: "Paper Code",
-      accessor: "Paper Code",
+      Header: 'Paper Code',
+      accessor: 'Paper Code',
       width: 150,
       Cell: ({ row }) => {
         if (row.original.Link === true) {
@@ -57,51 +57,51 @@ function index({ data, college }) {
               href={CourseGenerator(
                 selectedOption.year,
                 selectedOption.course,
-                row.original["Paper Code"]
+                row.original['Paper Code']
               )}
               className="text-primary border-b border-transparent hover:border-primary"
               target="_blank"
             >
-              {row.original["Paper Code"]}
+              {row.original['Paper Code']}
             </a>
           );
         }
 
-        return row.original["Paper Code"];
-      },
+        return row.original['Paper Code'];
+      }
     },
     {
-      Header: "Paper Name",
-      accessor: "Paper Name",
-      width: 200,
+      Header: 'Paper Name',
+      accessor: 'Paper Name',
+      width: 200
     },
     {
-      Header: "End Term Marks",
-      accessor: "End Term Marks",
+      Header: 'End Term Marks',
+      accessor: 'End Term Marks'
     },
     {
-      Header: "Mid Term Marks",
-      accessor: "Mid Term Marks",
+      Header: 'Mid Term Marks',
+      accessor: 'Mid Term Marks'
     },
     {
-      Header: "Total Marks",
-      accessor: "Total Marks",
+      Header: 'Total Marks',
+      accessor: 'Total Marks'
     },
     {
-      Header: "Credit",
-      accessor: "Credit",
+      Header: 'Credit',
+      accessor: 'Credit'
     },
     {
-      Header: "Type",
-      accessor: "Type",
-    },
+      Header: 'Type',
+      accessor: 'Type'
+    }
   ];
 
   useEffect(() => {
-    if (selectedOption.course === "" || selectedOption.year === "") return;
+    if (selectedOption.course === '' || selectedOption.year === '') return;
     let course = selectedOption.course;
     if (parseInt(selectedOption.year) < 3) {
-      course = "ALL";
+      course = 'ALL';
     }
 
     console.log(data[course]);
@@ -112,7 +112,7 @@ function index({ data, college }) {
           console.log(item.Semester, selectedOption.year);
           return parseInt(item.Semester) === parseInt(selectedOption.year);
         }),
-        columns: columns,
+        columns: columns
       };
     });
   }, [selectedOption]);
@@ -138,9 +138,7 @@ function index({ data, college }) {
                 isSearchable={false}
                 options={CourseOptions}
                 placeholder="Select Course"
-                onChange={(e) =>
-                  setselectedOption({ ...selectedOption, course: e.value })
-                }
+                onChange={(e) => setselectedOption({ ...selectedOption, course: e.value })}
               />
             </div>
             <div className="w-80 md:my-4">
@@ -148,24 +146,21 @@ function index({ data, college }) {
                 isSearchable={false}
                 options={YearOptions}
                 placeholder="Select Year"
-                onChange={(e) =>
-                  setselectedOption({ ...selectedOption, year: e.value })
-                }
+                onChange={(e) => setselectedOption({ ...selectedOption, year: e.value })}
               />
             </div>
           </div>
           <AnimatePresence exitBeforeEnter>
-            {selectedOption.course === "" ||
-            selectedOption.year === "" ? null : (
+            {selectedOption.course === '' || selectedOption.year === '' ? null : (
               <motion.div
                 initial={{
                   opacity: 0,
-                  y: -20,
+                  y: -20
                 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{
                   opacity: 0,
-                  y: 20,
+                  y: 20
                 }}
                 // style={{
                 //   width: size.width,
@@ -201,9 +196,9 @@ export async function getStaticProps(context) {
   return {
     props: {
       data: data,
-      college: college,
+      college: college
     },
-    revalidate: 1,
+    revalidate: 1
   };
 }
 

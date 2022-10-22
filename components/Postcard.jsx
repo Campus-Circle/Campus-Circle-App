@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { AiFillLike, AiOutlineLike } from "react-icons/ai";
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { AiFillLike, AiOutlineLike } from 'react-icons/ai';
+import axios from 'axios';
 
 function Post(props) {
   const auth = useSelector((state) => state.auth);
@@ -17,8 +17,8 @@ function Post(props) {
 
   const config = {
     headers: {
-      Authorization: `Bearer ${auth.token}`,
-    },
+      Authorization: `Bearer ${auth.token}`
+    }
   };
 
   const LikePost = async () => {
@@ -26,7 +26,7 @@ function Post(props) {
       const res = await axios.post(
         `${props.URL}/post/like`,
         {
-          id: props.item._id,
+          id: props.item._id
         },
         config
       );
@@ -43,7 +43,7 @@ function Post(props) {
       const res = await axios.post(
         `${props.URL}/post/dislike`,
         {
-          id: props.item._id,
+          id: props.item._id
         },
         config
       );
@@ -65,9 +65,7 @@ function Post(props) {
           {props.item.createdAt.slice(0, 10)}
         </span>
       </span>
-      <p className="mt-1 text-base  text-gray-500 tracking-tight">
-        {props.item.description}
-      </p>
+      <p className="mt-1 text-base  text-gray-500 tracking-tight">{props.item.description}</p>
       <div className="flex mt-3 cursor-pointer">
         {!Like ? (
           <AiOutlineLike
@@ -79,14 +77,17 @@ function Post(props) {
             <AiFillLike className="text-primary text-3xl md:text-2xl  cursor-pointer" />
           </button>
         )}
-          <span className="self-center ml-1 font-semibold text-primary text-xl md:text-base">
-            {LikeCount}
-          </span>
+        <span className="self-center ml-1 font-semibold text-primary text-xl md:text-base">
+          {LikeCount}
+        </span>
       </div>
-      <button className="inline-block w-40 mt-3 py-2 font-semibold text-primary 
+      <button
+        className="inline-block w-40 mt-3 py-2 font-semibold text-primary 
       hover:bg-slate-50/50 rounded-lg transition-all shadow-md shadow-transparent hover:shadow-primary/10 hover:-translate-y-1"
-            onClick={() => props.history.push(`/post/${props.item._id}`)}
-      >SEE ANSWERS</button>
+        onClick={() => props.history.push(`/post/${props.item._id}`)}
+      >
+        SEE ANSWERS
+      </button>
     </div>
   );
 }

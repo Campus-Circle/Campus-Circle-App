@@ -1,23 +1,23 @@
-import { createAsyncThunk ,createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 let initialState = {
   isAuth: false,
-  token: "",
+  token: '',
   user: {
-    id: "",
-    name: "",
-    email: "",
-    branch: "",
-    year: "",
-  },
+    id: '',
+    name: '',
+    email: '',
+    branch: '',
+    year: ''
+  }
 };
-if (typeof window !== "undefined") {
-  if (localStorage.getItem("CampusAuth") !== null) {
-        initialState = JSON.parse(localStorage.getItem("CampusAuth"));
+if (typeof window !== 'undefined') {
+  if (localStorage.getItem('CampusAuth') !== null) {
+    initialState = JSON.parse(localStorage.getItem('CampusAuth'));
   }
 }
 const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {
     setToken: (state, action) => {
@@ -29,9 +29,9 @@ const authSlice = createSlice({
     setAuth: (state, action) => {
       state.isAuth = action.payload;
     }
-  },
+  }
 });
 
-export const { setToken, setUser,setAuth } = authSlice.actions;
+export const { setToken, setUser, setAuth } = authSlice.actions;
 
 export default authSlice.reducer;
