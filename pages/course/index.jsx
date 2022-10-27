@@ -53,8 +53,8 @@ function index({ data, college }) {
           return (
             <a
               href={CourseGenerator(
-                selectedOption.year,
                 selectedOption.course,
+                selectedOption.year,
                 row.original['Paper Code']
               )}
               className="text-primary border-b border-transparent hover:border-primary"
