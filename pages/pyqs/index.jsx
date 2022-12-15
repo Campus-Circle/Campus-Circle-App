@@ -2,40 +2,27 @@ import axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
 import CourseSelector from '../../components/Forms/CourseSelector';
 import AppLayout from '../../components/Layout/AppLayout';
-import { GoLinkExternal } from 'react-icons/go';
-import { CourseGenerator, PYQGenerator } from '../../utils/LinkGen';
+import DocCard from '../../components/UI/Card/DocCard';
+import Info from '../../components/UI/Alerts/info';
+import { useRouter } from 'next/router';
+import useStorage from '../../hooks/useStorage';
+import dayjs from 'dayjs';
 
 function PYQ({ courses, pyq }) {
-  console.log(courses, pyq);
+  const router = useRouter();
+
   const [selectedOption, setSelectedOption] = useState(null);
-  const [Result, setResult] = useState({
-    courses: [],
-    pyq: []
-  });
+  const [PYQData, setPYQData] = useState([]);
 
-  useEffect(() => {
-    if (selectedOption?.course && selectedOption?.semester) {
-      ApplyFilter();
-    }
-  }, [selectedOption]);
+  const { listFiles } = useStorage();
 
-  const ApplyFilter = useCallback(() => {
-    const FilteredCourses = courses[
-      selectedOption.semester?.value < 3 ? 'ALL' : selectedOption.course?.value
-    ]
-      .filter((item) => item.Semester === selectedOption.semester.value)
-      .map((item) => {
-        return {
-          ...item,
-          pyq: pyq.filter((pyq) => pyq['Paper Code'] === item['Paper Code'])
-        };
-      });
-
-    console.log(FilteredCourses);
-
-    setResult({
-      courses: FilteredCourses
+  const handleApply = useCallback(async () => {
+    const data = await listFiles({
+      type: 'PYQ',
+      course: selectedOption.course.value,
+      semester: selectedOption.semester.value
     });
+    setPYQData(data);
   }, [selectedOption]);
 
   return (
@@ -44,52 +31,27 @@ function PYQ({ courses, pyq }) {
         <div className="flex justify-center items-center py-5">
           <h1 className="text-lg font-semibold">Previous Year Questions PYQs</h1>
         </div>
-        <div className="flex md:flex-row flex-col gap-8 px-8 justify-evenly mt-10">
+        <div className="m-2 mb-3">
+          <Info
+            buttonText="Share PYQs"
+            onButtonClick={() => {
+              router.push('/file/share');
+            }}
+            title="Have PYQs to share?"
+          />
+        </div>
+
+        <div className="flex md:flex-row flex-col gap-8 px-8 justify-evenly ">
           <CourseSelector
             Options={selectedOption}
             setOptions={setSelectedOption}
-            onApply={ApplyFilter}
-            isButtonDisabled={true}
+            onApply={handleApply}
           />
         </div>
-        <div className="flex justify-center items-center">
-          <div className="flex flex-col gap-2 w-11/12 py-4">
-            {Result.courses.map((item, index) => (
-              <div className="card " key={index}>
-                <div className="card-title">{item['Paper Name']}</div>
-                <div className="card-body">
-                  <div className="flex text-sm  opacity-40">{item['Paper Code']}</div>
-                  <div className="pt-6 flex flex-col">
-                    <a
-                      href={CourseGenerator(
-                        selectedOption?.course?.value,
-                        selectedOption?.semester?.value,
-                        item['Paper Code']
-                      )}
-                      className="flex text-primary underline underline-offset-4">
-                      <GoLinkExternal className="pr-1 self-center" /> Course Structure
-                    </a>
-
-                    <div className="flex flex-col gap-2 pt-2">
-                      {item.pyq.map((pyq, index) => (
-                        <a
-                          key={index}
-                          href={PYQGenerator(
-                            selectedOption?.course?.value,
-                            selectedOption?.semester?.value,
-                            pyq.fileName
-                          )}
-                          className="flex text-primary underline underline-offset-4">
-                          <GoLinkExternal className="pr-1 self-center" />
-                          {pyq.title}
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+        <div className="flex flex-col justify-center items-center h-full m-3 mx-8">
+          {PYQData.map((item, index) => {
+            return <DocCard item={item} key={index} />;
+          })}
         </div>
       </div>
     </AppLayout>
@@ -98,13 +60,11 @@ function PYQ({ courses, pyq }) {
 
 export async function getStaticProps() {
   const { data } = await axios.get(`${process.env.URL}/course/list.json`);
-  const { data: pyq } = await axios.get(`${process.env.URL}/pyq/index.json`);
   const college = process.env.COLLEGE;
 
   return {
     props: {
       courses: data,
-      pyq: pyq,
       college: college
     },
     revalidate: 1

@@ -25,5 +25,12 @@ module.exports = {
     'public/',
     'utils/',
     '.next/'
+  ],
+  'prettier/prettier': [
+    'error',
+    {
+      'endOfLine': 'auto',
+    }
   ]
+
 };

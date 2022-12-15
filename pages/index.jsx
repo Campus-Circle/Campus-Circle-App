@@ -109,34 +109,15 @@ export default function Home({ college, URL }) {
           </PrimaryButton>
         </div>
 
-        <Info>
-          <motion.span
-            animate={{ rotate: [-30, 30, -30] }}
-            whileHover={{ rotate: 360 }}
-            transition={{
-              duration: 1,
-              ease: 'easeInOut',
-              repeat: Infinity,
-              repeatType: 'reverse'
+        <div className="mt-5">
+          <Info
+            title="Looking for Maintainers!"
+            buttonText="Apply Now"
+            onButtonClick={() => {
+              window.open('https://forms.gle/w39aexbFa6D54DCb6', '_blank');
             }}
-            className="w-7 h-7">
-            <HiLightBulb
-              className="w-full h-full
-              bg-gradient-to-br from-yellow-500 to-yellow-400 rounded-full p-1 text-white"
-            />
-          </motion.span>
-          <h1 className="text-black self-center">
-            Looking for <span className="text-yellow-600">Maintainers!</span>
-          </h1>
-
-          <div className="">
-            <Link href="https://forms.gle/w39aexbFa6D54DCb6" target={'_blank'}>
-              <p className="bg-yellow-500 text-sm px-2 p-1 text-white rounded-md cursor-pointer hover:bg-yellow-600 transition-all">
-                Apply Now
-              </p>
-            </Link>
-          </div>
-        </Info>
+          />
+        </div>
       </div>
     </AppLayout>
   );

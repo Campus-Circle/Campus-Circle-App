@@ -1,41 +1,10 @@
 import React, { useMemo } from 'react';
 import Select from 'react-select';
 import PropTypes from 'prop-types';
+import { courseOptions, semesterOptions } from '../../utils/constants';
 
 function CourseSelector({ Options, setOptions, onApply, isButtonDisabled }) {
   const handleChange = (type) => (data) => setOptions({ ...Options, [type]: data });
-
-  const CourseOptions = [
-    {
-      value: 'CSE',
-      label: 'Computer Science Engineering'
-    },
-    {
-      value: 'ECE',
-      label: 'Electronics and Communication Engineering'
-    },
-    {
-      value: 'EE',
-      label: 'Electrical Engineering'
-    },
-    {
-      value: 'ME',
-      label: 'Mechanical Engineering'
-    },
-    {
-      value: 'CE',
-      label: 'Civil Engineering'
-    }
-  ];
-
-  const SemesterOptions = Array(8)
-    .fill(0)
-    .map((_, index) => {
-      return {
-        value: index + 1,
-        label: `${index + 1} Semester`
-      };
-    });
 
   const isSubmitDisabled = useMemo(() => {
     if (Options?.semester?.value != undefined && Options?.course?.value != undefined) return false;
@@ -47,14 +16,14 @@ function CourseSelector({ Options, setOptions, onApply, isButtonDisabled }) {
       <Select
         placeholder="Select Course"
         className="flex-1"
-        options={CourseOptions}
+        options={courseOptions}
         isSearchable={false}
         onChange={handleChange('course')}
       />
       <Select
         placeholder="Select Semester"
         className="flex-1"
-        options={SemesterOptions}
+        options={semesterOptions}
         onChange={handleChange('semester')}
         isSearchable={false}
       />
